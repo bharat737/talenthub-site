@@ -1910,6 +1910,194 @@
             font-weight: 500;
         }
 
+        /* Applications Modal Styles */
+        .applications-modal-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .applications-modal-header h2 {
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+
+        .applications-modal-header p {
+            color: #64748b;
+            margin: 0;
+        }
+
+        .applications-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .application-item {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .application-item:hover {
+            background: white;
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .application-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .application-info {
+            flex: 1;
+        }
+
+        .application-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+
+        .application-company {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .application-location {
+            color: #64748b;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .application-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.5rem;
+        }
+
+        .status-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-applied {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-reviewing {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-interview {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .application-date {
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        .application-details {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .application-tag {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .application-tag.salary {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .application-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn-view-job {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view-job:hover {
+            background: #5a6fd8;
+        }
+
+        .btn-withdraw {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-withdraw:hover {
+            background: #fee2e2;
+            border-color: #fca5a5;
+            color: #dc2626;
+        }
+
+        .no-applications {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #64748b;
+        }
+
+        .no-applications h3 {
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+
+        .no-applications p {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
         /* Mobile Responsive for Profile */
         @media (max-width: 768px) {
             .profile-sidebar {
@@ -2022,6 +2210,20 @@
             .project-links {
                 flex-direction: column;
                 gap: 0.5rem;
+            }
+
+            .application-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .application-status {
+                align-items: flex-start;
+            }
+
+            .application-actions {
+                flex-direction: column;
             }
         }
 
@@ -2302,7 +2504,7 @@
     </section>
 
     <!-- Main Content -->
-    <main class="main-content">
+    <main class="main-content" id="jobs">
         <div class="container">
             <div class="section-header">
                 <h2 class="section-title">Latest Job Opportunities</h2>
@@ -2369,7 +2571,7 @@
         </div>
 
         <!-- Featured Companies -->
-        <section class="companies-section">
+        <section class="companies-section" id="companies">
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Featured Companies</h2>
@@ -2445,6 +2647,89 @@
             </div>
         </div>
     </div>
+
+    <!-- About Section -->
+    <section id="about" style="background: white; padding: 4rem 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About TalentHub</h2>
+                <p class="section-subtitle">Connecting talented professionals with amazing opportunities worldwide</p>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 1.1rem; line-height: 1.8; color: #64748b; margin-bottom: 2rem;">
+                    TalentHub is more than just a job board – we're your career partner. Founded in 2020, we've helped over 50,000 professionals find their dream jobs at top companies worldwide. Our mission is to make job searching simple, efficient, and successful for everyone.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                    <div style="text-align: center; padding: 2rem; background: #f8fafc; border-radius: 15px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎯</div>
+                        <h3 style="color: #1a202c; margin-bottom: 0.5rem;">Our Mission</h3>
+                        <p style="color: #64748b; margin: 0;">To connect the right talent with the right opportunities</p>
+                    </div>
+                    <div style="text-align: center; padding: 2rem; background: #f8fafc; border-radius: 15px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🌟</div>
+                        <h3 style="color: #1a202c; margin-bottom: 0.5rem;">Our Vision</h3>
+                        <p style="color: #64748b; margin: 0;">A world where everyone finds meaningful work they love</p>
+                    </div>
+                    <div style="text-align: center; padding: 2rem; background: #f8fafc; border-radius: 15px;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">💼</div>
+                        <h3 style="color: #1a202c; margin-bottom: 0.5rem;">Our Values</h3>
+                        <p style="color: #64748b; margin: 0;">Transparency, innovation, and putting people first</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="background: #f8fafc; padding: 4rem 0;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Have questions? We'd love to hear from you</p>
+            </div>
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+                    <div style="text-align: center; padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">📧</div>
+                        <h3 style="color: #1a202c; margin-bottom: 0.5rem;">Email Us</h3>
+                        <p style="color: #64748b; margin: 0;">support@talenthub.com</p>
+                    </div>
+                    <div style="text-align: center; padding: 2rem; background: white; border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+                        <div style="font-size: 2rem; margin-bottom: 1rem;">📞</div>
+                        <h3 style="color: #1a202c; margin-bottom: 0.5rem;">Call Us</h3>
+                        <p style="color: #64748b; margin: 0;">1-800-TALENT</p>
+                    </div>
+                </div>
+                <form style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);" onsubmit="handleContactForm(event)">
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: #374151; font-weight: 600;">Name</label>
+                        <input type="text" required style="width: 100%; padding: 0.875rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 0.95rem;" placeholder="Your full name">
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: #374151; font-weight: 600;">Email</label>
+                        <input type="email" required style="width: 100%; padding: 0.875rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 0.95rem;" placeholder="your.email@example.com">
+                    </div>
+                    <div style="margin-bottom: 1.5rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: #374151; font-weight: 600;">Subject</label>
+                        <select required style="width: 100%; padding: 0.875rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 0.95rem;">
+                            <option value="">Select a topic</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Technical Support</option>
+                            <option value="employer">Employer Services</option>
+                            <option value="feedback">Feedback</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 2rem;">
+                        <label style="display: block; margin-bottom: 0.5rem; color: #374151; font-weight: 600;">Message</label>
+                        <textarea required rows="5" style="width: 100%; padding: 0.875rem 1rem; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 0.95rem; resize: vertical;" placeholder="Tell us how we can help you..."></textarea>
+                    </div>
+                    <button type="submit" style="width: 100%; padding: 0.875rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 10px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -2558,6 +2843,15 @@
                 
                 <div class="auth-divider">
                     <span>or continue with email</span>
+                </div>
+
+                <div style="background: #f0f4ff; border: 1px solid #e0e7ff; border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
+                    <h4 style="margin: 0 0 0.5rem 0; color: #3730a3; font-size: 0.9rem;">🔑 Demo Credentials</h4>
+                    <div style="font-size: 0.85rem; color: #374151; line-height: 1.4;">
+                        <strong>Email:</strong> demo@talenthub.com<br>
+                        <strong>Password:</strong> demo123<br><br>
+                        <strong>Or try:</strong> john.doe@email.com / password
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -2859,6 +3153,20 @@
             <button class="close-modal" onclick="closeCompanyModal()">&times;</button>
             <div id="companyModalContent">
                 <!-- Company details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Applications Modal -->
+    <div class="modal" id="applicationsModal">
+        <div class="modal-content" style="max-width: 900px;">
+            <button class="close-modal" onclick="closeApplicationsModal()">&times;</button>
+            <div class="applications-modal-header">
+                <h2>My Applications</h2>
+                <p>Track the status of your job applications</p>
+            </div>
+            <div id="applicationsContent">
+                <!-- Applications will be populated here -->
             </div>
         </div>
     </div>
@@ -3251,9 +3559,45 @@
 
         // Apply to job
         function applyToJob(jobId) {
+            // Check if user is logged in
+            if (!window.currentUser) {
+                // Store the job ID to apply after login
+                window.pendingApplication = jobId;
+                alert('Please sign in to apply for jobs. You will be redirected to the application after logging in.');
+                closeModal();
+                closeCompanyModal();
+                openLoginModal();
+                return;
+            }
+
             const job = jobsData.find(j => j.id === jobId);
+            
+            // Check if already applied
+            if (window.appliedJobs && window.appliedJobs.some(app => app.jobId === jobId)) {
+                alert(`You have already applied for the ${job.title} position at ${job.company}.`);
+                return;
+            }
+
+            // Add to applied jobs
+            const application = {
+                id: Date.now(),
+                jobId: jobId,
+                jobTitle: job.title,
+                company: job.company,
+                location: job.location,
+                salary: job.salary,
+                appliedDate: new Date().toISOString(),
+                status: 'Applied'
+            };
+
+            if (!window.appliedJobs) {
+                window.appliedJobs = [];
+            }
+            window.appliedJobs.push(application);
+
             alert(`Thank you for your interest in the ${job.title} position at ${job.company}! Your application has been submitted.`);
             closeModal();
+            closeCompanyModal();
         }
 
         // Show/hide loading
@@ -3337,6 +3681,15 @@
                         // Update UI to show logged in state
                         updateAuthUI(email);
                         
+                        // Check if there's a pending application
+                        if (window.pendingApplication) {
+                            const jobId = window.pendingApplication;
+                            window.pendingApplication = null;
+                            setTimeout(() => {
+                                applyToJob(jobId);
+                            }, 500);
+                        }
+                        
                         this.reset();
                     } else {
                         alert('Invalid credentials! Try:\n\nEmail: demo@talenthub.com\nPassword: demo123\n\nOr:\n\nEmail: john.doe@email.com\nPassword: password');
@@ -3382,6 +3735,15 @@
                     
                     // Update UI to show logged in state
                     updateAuthUI(email);
+                    
+                    // Check if there's a pending application
+                    if (window.pendingApplication) {
+                        const jobId = window.pendingApplication;
+                        window.pendingApplication = null;
+                        setTimeout(() => {
+                            applyToJob(jobId);
+                        }, 500);
+                    }
                     
                     signupBtn.textContent = originalText;
                     signupBtn.disabled = false;
@@ -3431,6 +3793,8 @@
             
             // Clear user data
             window.currentUser = null;
+            window.appliedJobs = null;
+            window.pendingApplication = null;
             
             alert('You have been logged out successfully.');
         }
@@ -3523,7 +3887,18 @@
         }
 
         function viewApplications() {
-            alert('My Applications page would show all your job applications with their current status (Applied, Under Review, Interview Scheduled, etc.)');
+            if (!window.currentUser) {
+                alert('Please sign in to view your applications.');
+                openLoginModal();
+                return;
+            }
+
+            if (!window.appliedJobs || window.appliedJobs.length === 0) {
+                alert('You haven\'t applied to any jobs yet. Start browsing and apply to jobs that interest you!');
+                return;
+            }
+
+            openApplicationsModal();
         }
 
         function viewSavedJobs() {
@@ -3773,6 +4148,94 @@
             document.getElementById('companyModal').style.display = 'none';
         }
 
+        // Applications Modal Functions
+        function openApplicationsModal() {
+            const modal = document.getElementById('applicationsModal');
+            const content = document.getElementById('applicationsContent');
+            
+            if (!window.appliedJobs || window.appliedJobs.length === 0) {
+                content.innerHTML = `
+                    <div class="no-applications">
+                        <h3>No Applications Yet</h3>
+                        <p>You haven't applied to any jobs yet. Start browsing our job listings and apply to positions that match your skills and interests!</p>
+                        <button class="btn-primary" onclick="closeApplicationsModal(); document.getElementById('jobs').scrollIntoView({ behavior: 'smooth' });">
+                            Browse Jobs
+                        </button>
+                    </div>
+                `;
+            } else {
+                content.innerHTML = `
+                    <div class="applications-list">
+                        ${window.appliedJobs.map(app => renderApplicationItem(app)).join('')}
+                    </div>
+                `;
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        function closeApplicationsModal() {
+            document.getElementById('applicationsModal').style.display = 'none';
+        }
+
+        function renderApplicationItem(application) {
+            const appliedDate = new Date(application.appliedDate).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+
+            const statusClass = `status-${application.status.toLowerCase().replace(' ', '-')}`;
+            
+            return `
+                <div class="application-item">
+                    <div class="application-header">
+                        <div class="application-info">
+                            <div class="application-title">${application.jobTitle}</div>
+                            <div class="application-company">${application.company}</div>
+                            <div class="application-location">📍 ${application.location}</div>
+                        </div>
+                        <div class="application-status">
+                            <span class="status-badge ${statusClass}">${application.status}</span>
+                            <span class="application-date">Applied ${appliedDate}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="application-details">
+                        <span class="application-tag salary">${application.salary}</span>
+                        <span class="application-tag">Application #${application.id}</span>
+                    </div>
+                    
+                    <div class="application-actions">
+                        <button class="btn-view-job" onclick="viewJobFromApplication(${application.jobId}); closeApplicationsModal();">
+                            View Job Details
+                        </button>
+                        <button class="btn-withdraw" onclick="withdrawApplication(${application.id})">
+                            Withdraw Application
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function viewJobFromApplication(jobId) {
+            openJobModal(jobId);
+        }
+
+        function withdrawApplication(applicationId) {
+            if (confirm('Are you sure you want to withdraw this application? This action cannot be undone.')) {
+                window.appliedJobs = window.appliedJobs.filter(app => app.id !== applicationId);
+                
+                // Refresh the applications modal if it's open
+                const modal = document.getElementById('applicationsModal');
+                if (modal.style.display === 'block') {
+                    openApplicationsModal();
+                }
+                
+                alert('Application withdrawn successfully.');
+            }
+        }
+
         // Close modal when clicking outside
         window.onclick = function(event) {
             const jobModal = document.getElementById('jobModal');
@@ -3781,6 +4244,7 @@
             const profileModal = document.getElementById('profileModal');
             const resumeModal = document.getElementById('resumeModal');
             const companyModal = document.getElementById('companyModal');
+            const applicationsModal = document.getElementById('applicationsModal');
             
             if (event.target === jobModal) {
                 closeModal();
@@ -3792,6 +4256,8 @@
                 closeResumeModal();
             } else if (event.target === companyModal) {
                 closeCompanyModal();
+            } else if (event.target === applicationsModal) {
+                closeApplicationsModal();
             }
         }
 
@@ -4331,8 +4797,39 @@
             }
         }
 
+        // Navigation scroll function
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }
+
+        // Contact form handler
+        function handleContactForm(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Thank you for your message! We\'ll get back to you within 24 hours.');
+                form.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        }
+
         // Initialize the app
         init();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'986d0440464731c4',t:'MTc1OTE2NTAxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9873d7eb942247b0',t:'MTc1OTIzNjYwMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>

@@ -1,0 +1,4338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalentHub - Find Your Dream Job</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-outline {
+            padding: 0.5rem 1.5rem;
+            border: 2px solid #667eea;
+            background: transparent;
+            color: #667eea;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary {
+            padding: 0.5rem 1.5rem;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .search-container {
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem;
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 25px;
+            outline: none;
+        }
+
+        .search-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-btn:hover {
+            background: #5a6fd8;
+            transform: scale(1.05);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .stat-label {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: #f8fafc;
+            min-height: 100vh;
+            padding: 3rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Filters */
+        .filters {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-select {
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        /* Job Cards */
+        .jobs-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .job-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .job-info {
+            flex: 1;
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-name {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-location {
+            color: #64748b;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .job-details {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .job-tag {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .job-tag.salary {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .job-tag.type {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .job-description {
+            color: #64748b;
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+
+        .job-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .job-posted {
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+
+        .apply-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .apply-btn:hover {
+            background: #5a6fd8;
+            transform: scale(1.05);
+        }
+
+        /* Featured Companies */
+        .companies-section {
+            background: white;
+            padding: 4rem 0;
+            margin-top: 4rem;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .company-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .company-card-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin: 0 auto 1rem;
+        }
+
+        .company-card h3 {
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-jobs {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        /* Profile Menu */
+        .profile-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Notification Icon */
+        .notification-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .notification-icon:hover {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        .notification-bell {
+            font-size: 1.2rem;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .profile-icon {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .profile-icon:hover {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            color: #1a202c;
+            font-size: 0.9rem;
+        }
+
+        /* Profile Sidebar */
+        .profile-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+            z-index: 2000;
+            transition: right 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .profile-sidebar.active {
+            right: 0;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            color: white;
+            text-align: center;
+        }
+
+        .sidebar-avatar {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.8rem;
+            margin: 0 auto 1rem;
+        }
+
+        .sidebar-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-email {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-content {
+            padding: 0;
+        }
+
+        .sidebar-section {
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .sidebar-section:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-section-title {
+            padding: 1.5rem 2rem 1rem;
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar-menu li {
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .sidebar-menu li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu a:hover {
+            background: #f8fafc;
+            color: #667eea;
+        }
+
+        .sidebar-menu-icon {
+            font-size: 1.1rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .sidebar-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #667eea;
+            cursor: pointer;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 1rem;
+        }
+
+        .mobile-nav.active {
+            display: block;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 1rem;
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 0.75rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            background-color: #f8fafc;
+            color: #667eea;
+        }
+
+        .mobile-auth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .companies-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-container {
+                padding: 0 1rem;
+                position: relative;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .auth-buttons {
+                display: none;
+            }
+
+            .hero {
+                padding: 3rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .search-container {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 0.75rem;
+            }
+
+            .search-input {
+                padding: 0.875rem 1rem;
+            }
+
+            .search-btn {
+                padding: 0.875rem 1.5rem;
+                width: 100%;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 1.5rem;
+                margin-top: 2rem;
+            }
+
+            .stat {
+                padding: 1rem;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                backdrop-filter: blur(10px);
+            }
+
+            .main-content {
+                padding: 2rem 0;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section-header {
+                margin-bottom: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+
+            .filters {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .filter-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .filter-select {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+
+            .job-card {
+                padding: 1.5rem;
+            }
+
+            .job-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .company-logo {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+
+            .job-title {
+                font-size: 1.2rem;
+            }
+
+            .job-details {
+                flex-wrap: wrap;
+                gap: 0.75rem;
+            }
+
+            .job-tag {
+                font-size: 0.75rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            .job-footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .apply-btn {
+                width: 100%;
+                padding: 0.75rem;
+            }
+
+            .companies-section {
+                padding: 3rem 0;
+            }
+
+            .companies-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1.5rem;
+            }
+
+            .company-card {
+                padding: 1.5rem;
+            }
+
+            .company-card-logo {
+                width: 60px;
+                height: 60px;
+                font-size: 1.2rem;
+            }
+
+            /* Auth Modal Mobile */
+            .auth-modal-content {
+                margin: 2% auto;
+                max-width: 95%;
+                max-height: 95vh;
+            }
+
+            .auth-header {
+                padding: 1.5rem;
+            }
+
+            .auth-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .auth-form {
+                padding: 1.5rem;
+            }
+
+            .social-login {
+                flex-direction: column;
+            }
+
+            .form-input {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+
+            .auth-btn {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+
+            .modal-content {
+                margin: 2% auto;
+                padding: 1.5rem;
+                max-width: 95%;
+                max-height: 90vh;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .job-card {
+                padding: 1.25rem;
+            }
+
+            .job-title {
+                font-size: 1.1rem;
+            }
+
+            .companies-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .company-card {
+                padding: 1.25rem;
+            }
+
+            .company-card-logo {
+                width: 50px;
+                height: 50px;
+                font-size: 1rem;
+            }
+
+            .stats {
+                gap: 1rem;
+            }
+
+            .stat {
+                padding: 0.75rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .auth-header {
+                padding: 1.25rem;
+            }
+
+            .auth-form {
+                padding: 1.25rem;
+            }
+        }
+
+        /* Landscape Mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .hero {
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .stats {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            .auth-modal-content {
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+        }
+
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .job-card:hover {
+                transform: none;
+            }
+
+            .job-card:active {
+                transform: scale(0.98);
+                transition: transform 0.1s ease;
+            }
+
+            .btn-primary:hover,
+            .apply-btn:hover,
+            .search-btn:hover {
+                transform: none;
+            }
+
+            .btn-primary:active,
+            .apply-btn:active,
+            .search-btn:active {
+                transform: scale(0.95);
+                transition: transform 0.1s ease;
+            }
+
+            .company-card:hover {
+                transform: none;
+            }
+
+            .company-card:active {
+                transform: scale(0.98);
+                transition: transform 0.1s ease;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #64748b;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #1a202c;
+        }
+
+        .modal h2 {
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+
+        /* Auth Modal Styles */
+        .auth-modal-content {
+            background: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 20px;
+            max-width: 450px;
+            max-height: 95vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.4s ease;
+        }
+
+        .auth-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .auth-header h2 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .auth-header p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .auth-form {
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: #f9fafb;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-input:valid {
+            border-color: #10b981;
+        }
+
+        .auth-btn {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 1rem;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .auth-btn:active {
+            transform: translateY(0);
+        }
+
+        .auth-divider {
+            text-align: center;
+            margin: 1.5rem 0;
+            position: relative;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+
+        .auth-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e5e7eb;
+            z-index: 1;
+        }
+
+        .auth-divider span {
+            background: white;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .social-login {
+            display: flex;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        .social-btn:hover {
+            border-color: #667eea;
+            background: #f8fafc;
+        }
+
+        .auth-switch {
+            text-align: center;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .auth-switch a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #667eea;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #6b7280;
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 1.5rem;
+        }
+
+        .forgot-password a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* Profile Modal Styles */
+        .profile-modal-header {
+            margin-bottom: 2rem;
+        }
+
+        .profile-modal-header h2 {
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-modal-header p {
+            color: #64748b;
+            margin: 0;
+        }
+
+        .profile-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .profile-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .profile-section h3 {
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Resume Modal Styles */
+        .resume-modal-header {
+            margin-bottom: 2rem;
+        }
+
+        .resume-modal-header h2 {
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+
+        .resume-modal-header p {
+            color: #64748b;
+            margin: 0;
+        }
+
+        .resume-upload-section {
+            margin-bottom: 2rem;
+        }
+
+        .upload-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: #667eea;
+            background: #f8fafc;
+        }
+
+        .upload-area.dragover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .upload-area h3 {
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-area p {
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-formats {
+            font-size: 0.85rem;
+            color: #9ca3af;
+            margin-bottom: 1.5rem !important;
+        }
+
+        .current-resume {
+            margin-bottom: 2rem;
+        }
+
+        .current-resume h3 {
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+
+        .resume-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .resume-info {
+            flex: 1;
+        }
+
+        .resume-name {
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 0.25rem;
+        }
+
+        .resume-details {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .resume-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .resume-tips {
+            background: #f0f4ff;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #e0e7ff;
+        }
+
+        .resume-tips h3 {
+            color: #1a202c;
+            margin-bottom: 1rem;
+        }
+
+        .resume-tips ul {
+            margin: 0;
+            padding-left: 1.5rem;
+            color: #374151;
+        }
+
+        .resume-tips li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Company Modal Styles */
+        .company-modal-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .company-logo-large {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 2rem;
+        }
+
+        .company-header-info h2 {
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+
+        .company-stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .company-stat {
+            text-align: center;
+        }
+
+        .company-stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+        }
+
+        .company-stat-label {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .company-description {
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .company-section {
+            margin-bottom: 2rem;
+        }
+
+        .company-section h3 {
+            color: #1a202c;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .company-benefits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .benefit-icon {
+            font-size: 1.2rem;
+        }
+
+        .benefit-text {
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .company-jobs-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .company-job-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .company-job-item:hover {
+            background: white;
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .company-job-info {
+            flex: 1;
+        }
+
+        .company-job-title {
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-job-details {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .company-job-tag {
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .company-job-salary {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .company-apply-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .company-apply-btn:hover {
+            background: #5a6fd8;
+            transform: scale(1.05);
+        }
+
+        /* Profile Section Styles */
+        .section-header-with-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-add {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add:hover {
+            background: #5a6fd8;
+            transform: translateY(-1px);
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        .experience-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .experience-item {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-weight: 600;
+            color: #1a202c;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-company {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-duration {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .experience-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-icon {
+            background: none;
+            border: 1px solid #d1d5db;
+            padding: 0.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .btn-icon:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
+        }
+
+        .btn-icon.delete:hover {
+            background: #fef2f2;
+            border-color: #fca5a5;
+            color: #dc2626;
+        }
+
+        .experience-description {
+            color: #374151;
+            line-height: 1.6;
+            margin-top: 1rem;
+        }
+
+        .experience-form {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn-cancel {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel:hover {
+            background: #e5e7eb;
+        }
+
+        .btn-save {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-save:hover {
+            background: #5a6fd8;
+        }
+
+        /* Resume Upload Mini */
+        .resume-upload-mini {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .upload-area-mini {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area-mini:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .upload-icon-mini {
+            font-size: 2rem;
+        }
+
+        .upload-text h4 {
+            margin: 0 0 0.25rem 0;
+            color: #1a202c;
+            font-size: 1rem;
+        }
+
+        .upload-text p {
+            margin: 0;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .current-resume-mini {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .resume-info-mini {
+            flex: 1;
+        }
+
+        .resume-name-mini {
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 0.25rem;
+        }
+
+        .resume-details-mini {
+            font-size: 0.85rem;
+            color: #64748b;
+        }
+
+        .resume-actions-mini {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Project specific styles */
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .project-link {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        .project-technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Mobile Responsive for Profile */
+        @media (max-width: 768px) {
+            .profile-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .sidebar-header {
+                padding: 1.5rem;
+            }
+            
+            .sidebar-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 1.4rem;
+            }
+            
+            .sidebar-name {
+                font-size: 1.1rem;
+            }
+            
+            .sidebar-section-title {
+                padding: 1rem 1.5rem 0.5rem;
+            }
+            
+            .sidebar-menu a {
+                padding: 0.875rem 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+            }
+
+            .resume-item {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .resume-actions {
+                justify-content: center;
+            }
+
+            .upload-area {
+                padding: 2rem 1rem;
+            }
+
+            .company-modal-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .company-stats {
+                justify-content: center;
+            }
+
+            .company-benefits {
+                grid-template-columns: 1fr;
+            }
+
+            .company-job-item {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .company-job-details {
+                justify-content: center;
+            }
+
+            .section-header-with-action {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .experience-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .experience-actions {
+                align-self: flex-start;
+            }
+
+            .upload-area-mini {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .current-resume-mini {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .resume-actions-mini {
+                justify-content: center;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .project-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a202c;
+            color: white;
+            padding: 4rem 0 0;
+            margin-top: 4rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo .logo {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-decoration: none;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .footer-description {
+            color: #a0aec0;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            max-width: 300px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .footer-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #a0aec0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #2d3748;
+            padding: 2rem 0;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-bottom-links a {
+            color: #a0aec0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            color: white;
+        }
+
+        /* Footer Responsive */
+        @media (max-width: 1024px) {
+            .footer-content {
+                grid-template-columns: 2fr 1fr 1fr;
+                gap: 2rem;
+            }
+
+            .footer-section:nth-child(4),
+            .footer-section:nth-child(5) {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                padding: 3rem 0 0;
+                margin-top: 3rem;
+            }
+
+            .footer-container {
+                padding: 0 1rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .footer-description {
+                max-width: none;
+            }
+
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .footer-bottom-links {
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer {
+                padding: 2rem 0 0;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .footer-bottom-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-50px) scale(0.95);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">🚀 TalentHub</a>
+            <ul class="nav-links">
+                <li><a href="#jobs">Jobs</a></li>
+                <li><a href="#companies">Companies</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="header-actions">
+                <!-- Auth buttons (shown when not logged in) -->
+                <div class="auth-buttons" id="authButtons">
+                    <a href="#" class="btn-outline" onclick="openLoginModal()">Sign In</a>
+                    <a href="#" class="btn-primary" onclick="openSignupModal()">Sign Up</a>
+                </div>
+                
+                <!-- Profile Menu (shown when logged in) -->
+                <div class="profile-menu" id="profileMenu" style="display: none;">
+                    <div class="notification-icon" onclick="showNotifications()">
+                        <span class="notification-bell">🔔</span>
+                        <span class="notification-badge" id="notificationBadge">3</span>
+                    </div>
+                    <div class="profile-icon" onclick="toggleSidebar()">
+                        <div class="profile-avatar" id="profileAvatar">
+                            <span id="profileInitials">JD</span>
+                        </div>
+                        <span class="profile-name" id="profileName">John Doe</span>
+                    </div>
+                </div>
+                
+
+            </div>
+            
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+            
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav" id="mobileNav">
+                <ul class="mobile-nav-links">
+                    <li><a href="#jobs" onclick="closeMobileMenu()">Jobs</a></li>
+                    <li><a href="#companies" onclick="closeMobileMenu()">Companies</a></li>
+                    <li><a href="#about" onclick="closeMobileMenu()">About</a></li>
+                    <li><a href="#contact" onclick="closeMobileMenu()">Contact</a></li>
+                </ul>
+                <div class="mobile-auth-buttons">
+                    <a href="#" class="btn-outline" onclick="openLoginModal(); closeMobileMenu();">Sign In</a>
+                    <a href="#" class="btn-primary" onclick="openSignupModal(); closeMobileMenu();">Sign Up</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1>Find Your Dream Job Today</h1>
+            <p>Discover thousands of job opportunities from top companies worldwide. Your next career move starts here.</p>
+            
+            <div class="search-container">
+                <input type="text" class="search-input" id="jobSearch" placeholder="Job title, keywords, or company">
+                <input type="text" class="search-input" id="locationSearch" placeholder="City or remote">
+                <button class="search-btn" onclick="searchJobs()">Search Jobs</button>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-number" id="totalJobs">2,847</span>
+                    <span class="stat-label">Active Jobs</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">1,200+</span>
+                    <span class="stat-label">Companies</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">50K+</span>
+                    <span class="stat-label">Job Seekers</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Latest Job Opportunities</h2>
+                <p class="section-subtitle">Explore our curated selection of the best job opportunities from leading companies</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <div class="filter-grid">
+                    <div class="filter-group">
+                        <label class="filter-label">Job Type</label>
+                        <select class="filter-select" id="jobTypeFilter">
+                            <option value="">All Types</option>
+                            <option value="Full-time">Full-time</option>
+                            <option value="Part-time">Part-time</option>
+                            <option value="Contract">Contract</option>
+                            <option value="Remote">Remote</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Experience Level</label>
+                        <select class="filter-select" id="experienceFilter">
+                            <option value="">All Levels</option>
+                            <option value="Entry">Entry Level</option>
+                            <option value="Mid">Mid Level</option>
+                            <option value="Senior">Senior Level</option>
+                            <option value="Executive">Executive</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Industry</label>
+                        <select class="filter-select" id="industryFilter">
+                            <option value="">All Industries</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Design">Design</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Salary Range</label>
+                        <select class="filter-select" id="salaryFilter">
+                            <option value="">Any Salary</option>
+                            <option value="0-50k">$0 - $50k</option>
+                            <option value="50k-100k">$50k - $100k</option>
+                            <option value="100k-150k">$100k - $150k</option>
+                            <option value="150k+">$150k+</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Finding the perfect jobs for you...</p>
+            </div>
+
+            <!-- Jobs Grid -->
+            <div class="jobs-grid" id="jobsGrid">
+                <!-- Jobs will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Featured Companies -->
+        <section class="companies-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Featured Companies</h2>
+                    <p class="section-subtitle">Join thousands of professionals working at these amazing companies</p>
+                </div>
+                <div class="companies-grid" id="companiesGrid">
+                    <!-- Companies will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Profile Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+    <div class="profile-sidebar" id="profileSidebar">
+        <button class="sidebar-close" onclick="closeSidebar()">&times;</button>
+        <div class="sidebar-header">
+            <div class="sidebar-avatar">
+                <span id="sidebarInitials">JD</span>
+            </div>
+            <div class="sidebar-name" id="sidebarName">John Doe</div>
+            <div class="sidebar-email" id="sidebarEmail">john.doe@email.com</div>
+        </div>
+        
+        <div class="sidebar-content">
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Profile</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" onclick="openProfileModal(); closeSidebar();">
+                        <span class="sidebar-menu-icon">👤</span>
+                        Edit Profile
+                    </a></li>
+                    <li><a href="#" onclick="openResumeModal(); closeSidebar();">
+                        <span class="sidebar-menu-icon">📄</span>
+                        Resume & CV
+                    </a></li>
+                    <li><a href="#" onclick="viewApplications(); closeSidebar();">
+                        <span class="sidebar-menu-icon">📋</span>
+                        My Applications
+                    </a></li>
+                    <li><a href="#" onclick="viewSavedJobs(); closeSidebar();">
+                        <span class="sidebar-menu-icon">❤️</span>
+                        Saved Jobs
+                    </a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <div class="sidebar-section-title">Account</div>
+                <ul class="sidebar-menu">
+                    <li><a href="#" onclick="openSettingsModal(); closeSidebar();">
+                        <span class="sidebar-menu-icon">⚙️</span>
+                        Settings
+                    </a></li>
+                    <li><a href="#" onclick="showNotifications(); closeSidebar();">
+                        <span class="sidebar-menu-icon">🔔</span>
+                        Notifications
+                    </a></li>
+                    <li><a href="#" onclick="showHelp(); closeSidebar();">
+                        <span class="sidebar-menu-icon">❓</span>
+                        Help & Support
+                    </a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <ul class="sidebar-menu">
+                    <li><a href="#" onclick="logout(); closeSidebar();" style="color: #ef4444;">
+                        <span class="sidebar-menu-icon">🚪</span>
+                        Logout
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <a href="#" class="logo">🚀 TalentHub</a>
+                        <p class="footer-description">
+                            Your gateway to amazing career opportunities. Connect with top companies and find your dream job today.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" class="social-link">📘</a>
+                            <a href="#" class="social-link">🐦</a>
+                            <a href="#" class="social-link">💼</a>
+                            <a href="#" class="social-link">📷</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">For Job Seekers</h4>
+                    <ul class="footer-links">
+                        <li><a href="#jobs">Browse Jobs</a></li>
+                        <li><a href="#companies">Browse Companies</a></li>
+                        <li><a href="#" onclick="openResumeModal()">Upload Resume</a></li>
+                        <li><a href="#" onclick="viewSavedJobs()">Saved Jobs</a></li>
+                        <li><a href="#" onclick="viewApplications()">My Applications</a></li>
+                        <li><a href="#">Career Advice</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">For Employers</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Post a Job</a></li>
+                        <li><a href="#">Browse Resumes</a></li>
+                        <li><a href="#">Employer Dashboard</a></li>
+                        <li><a href="#">Pricing Plans</a></li>
+                        <li><a href="#">Recruitment Solutions</a></li>
+                        <li><a href="#">Success Stories</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-title">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Salary Guide</a></li>
+                        <li><a href="#">Interview Tips</a></li>
+                        <li><a href="#">Resume Templates</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 TalentHub. All rights reserved.</p>
+                    <div class="footer-bottom-links">
+                        <a href="#">Privacy</a>
+                        <a href="#">Terms</a>
+                        <a href="#">Cookies</a>
+                        <a href="#">Accessibility</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Job Detail Modal -->
+    <div class="modal" id="jobModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div id="modalContent">
+                <!-- Job details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="auth-modal-content">
+            <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+            <div class="auth-header">
+                <h2>Welcome Back!</h2>
+                <p>Sign in to access your account and find amazing opportunities</p>
+            </div>
+            <form class="auth-form" id="loginForm">
+                <div class="social-login">
+                    <button type="button" class="social-btn" onclick="socialLogin('google')">
+                        <span>🔍</span> Google
+                    </button>
+                    <button type="button" class="social-btn" onclick="socialLogin('linkedin')">
+                        <span>💼</span> LinkedIn
+                    </button>
+                </div>
+                
+                <div class="auth-divider">
+                    <span>or continue with email</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" class="form-input" required placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" class="form-input" required placeholder="Enter your password">
+                </div>
+
+                <div class="forgot-password">
+                    <a href="#" onclick="showForgotPassword()">Forgot your password?</a>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Remember me for 30 days</label>
+                </div>
+
+                <button type="submit" class="auth-btn">Sign In</button>
+
+                <div class="auth-switch">
+                    Don't have an account? <a onclick="switchToSignup()">Sign up for free</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="auth-modal-content">
+            <button class="close-modal" onclick="closeAuthModal()">&times;</button>
+            <div class="auth-header">
+                <h2>Join TalentHub</h2>
+                <p>Create your account and start your career journey today</p>
+            </div>
+            <form class="auth-form" id="signupForm">
+                <div class="social-login">
+                    <button type="button" class="social-btn" onclick="socialLogin('google')">
+                        <span>🔍</span> Google
+                    </button>
+                    <button type="button" class="social-btn" onclick="socialLogin('linkedin')">
+                        <span>💼</span> LinkedIn
+                    </button>
+                </div>
+                
+                <div class="auth-divider">
+                    <span>or create account with email</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" class="form-input" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label for="signupEmail">Email Address</label>
+                    <input type="email" id="signupEmail" class="form-input" required placeholder="Enter your email">
+                </div>
+
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" class="form-input" required placeholder="Create a strong password" minlength="8">
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" class="form-input" required placeholder="Confirm your password">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">I agree to the <a href="#" style="color: #667eea;">Terms of Service</a> and <a href="#" style="color: #667eea;">Privacy Policy</a></label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="emailUpdates">
+                    <label for="emailUpdates">Send me job alerts and career tips via email</label>
+                </div>
+
+                <button type="submit" class="auth-btn">Create Account</button>
+
+                <div class="auth-switch">
+                    Already have an account? <a onclick="switchToLogin()">Sign in here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div class="modal" id="profileModal">
+        <div class="modal-content" style="max-width: 700px;">
+            <button class="close-modal" onclick="closeProfileModal()">&times;</button>
+            <div class="profile-modal-header">
+                <h2>My Profile</h2>
+                <p>Manage your personal information and preferences</p>
+            </div>
+            
+            <form class="profile-form" id="profileForm">
+                <div class="profile-section">
+                    <h3>Personal Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profileFirstName">First Name</label>
+                            <input type="text" id="profileFirstName" class="form-input" placeholder="Enter your first name">
+                        </div>
+                        <div class="form-group">
+                            <label for="profileLastName">Last Name</label>
+                            <input type="text" id="profileLastName" class="form-input" placeholder="Enter your last name">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profileEmailEdit">Email Address</label>
+                        <input type="email" id="profileEmailEdit" class="form-input" placeholder="Enter your email">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profilePhone">Phone Number</label>
+                            <input type="tel" id="profilePhone" class="form-input" placeholder="Enter your phone number">
+                        </div>
+                        <div class="form-group">
+                            <label for="profileLocation">Location</label>
+                            <input type="text" id="profileLocation" class="form-input" placeholder="City, State">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profileBio">Professional Summary</label>
+                        <textarea id="profileBio" class="form-input" rows="4" placeholder="Write a brief summary about your professional background and career goals..."></textarea>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <div class="section-header-with-action">
+                        <h3>Work Experience</h3>
+                        <button type="button" class="btn-add" onclick="addWorkExperience()">+ Add Experience</button>
+                    </div>
+                    <div id="workExperienceList" class="experience-list">
+                        <!-- Work experiences will be added here -->
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <div class="section-header-with-action">
+                        <h3>Education</h3>
+                        <button type="button" class="btn-add" onclick="addEducation()">+ Add Education</button>
+                    </div>
+                    <div id="educationList" class="experience-list">
+                        <!-- Education entries will be added here -->
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <div class="section-header-with-action">
+                        <h3>Projects</h3>
+                        <button type="button" class="btn-add" onclick="addProject()">+ Add Project</button>
+                    </div>
+                    <div id="projectsList" class="experience-list">
+                        <!-- Projects will be added here -->
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h3>Skills & Expertise</h3>
+                    <div class="form-group">
+                        <label for="profileSkills">Technical Skills</label>
+                        <input type="text" id="profileSkills" class="form-input" placeholder="e.g., JavaScript, React, Node.js (comma separated)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="profileLanguages">Languages</label>
+                        <input type="text" id="profileLanguages" class="form-input" placeholder="e.g., English (Native), Spanish (Fluent), French (Basic)">
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="profileExperience">Years of Experience</label>
+                            <select id="profileExperience" class="form-input">
+                                <option value="">Select experience</option>
+                                <option value="0-1">0-1 years</option>
+                                <option value="2-5">2-5 years</option>
+                                <option value="6-10">6-10 years</option>
+                                <option value="11-15">11-15 years</option>
+                                <option value="15+">15+ years</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="profileSalary">Expected Salary</label>
+                            <select id="profileSalary" class="form-input">
+                                <option value="">Select range</option>
+                                <option value="0-50k">$0 - $50k</option>
+                                <option value="50k-100k">$50k - $100k</option>
+                                <option value="100k-150k">$100k - $150k</option>
+                                <option value="150k+">$150k+</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <h3>Resume Upload</h3>
+                    <div class="resume-upload-mini">
+                        <div class="upload-area-mini" id="profileUploadArea">
+                            <div class="upload-icon-mini">📄</div>
+                            <div class="upload-text">
+                                <h4>Upload Resume</h4>
+                                <p>PDF, DOC, DOCX (Max 5MB)</p>
+                            </div>
+                            <input type="file" id="profileResumeFile" accept=".pdf,.doc,.docx" style="display: none;">
+                            <button type="button" class="btn-outline" onclick="document.getElementById('profileResumeFile').click()">
+                                Choose File
+                            </button>
+                        </div>
+                        <div class="current-resume-mini" id="profileCurrentResume" style="display: none;">
+                            <div class="resume-info-mini">
+                                <div class="resume-name-mini" id="profileResumeName">resume.pdf</div>
+                                <div class="resume-details-mini">
+                                    <span id="profileResumeSize">2.3 MB</span> • 
+                                    <span id="profileResumeDate">Uploaded 2 days ago</span>
+                                </div>
+                            </div>
+                            <div class="resume-actions-mini">
+                                <button type="button" class="btn-outline btn-sm" onclick="downloadProfileResume()">Download</button>
+                                <button type="button" class="btn-outline btn-sm" onclick="deleteProfileResume()">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    <button type="button" class="btn-outline" onclick="closeProfileModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Resume Modal -->
+    <div class="modal" id="resumeModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <button class="close-modal" onclick="closeResumeModal()">&times;</button>
+            <div class="resume-modal-header">
+                <h2>Resume & CV</h2>
+                <p>Upload and manage your resume to apply for jobs</p>
+            </div>
+            
+            <div class="resume-content">
+                <div class="resume-upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">📄</div>
+                        <h3>Upload Your Resume</h3>
+                        <p>Drag and drop your resume here, or click to browse</p>
+                        <p class="upload-formats">Supported formats: PDF, DOC, DOCX (Max 5MB)</p>
+                        <input type="file" id="resumeFile" accept=".pdf,.doc,.docx" style="display: none;">
+                        <button type="button" class="btn-primary" onclick="document.getElementById('resumeFile').click()">
+                            Choose File
+                        </button>
+                    </div>
+                </div>
+
+                <div class="current-resume" id="currentResume" style="display: none;">
+                    <h3>Current Resume</h3>
+                    <div class="resume-item">
+                        <div class="resume-info">
+                            <div class="resume-name" id="resumeName">resume.pdf</div>
+                            <div class="resume-details">
+                                <span id="resumeSize">2.3 MB</span> • 
+                                <span id="resumeDate">Uploaded 2 days ago</span>
+                            </div>
+                        </div>
+                        <div class="resume-actions">
+                            <button type="button" class="btn-outline" onclick="downloadResume()">Download</button>
+                            <button type="button" class="btn-outline" onclick="deleteResume()">Delete</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume-tips">
+                    <h3>Resume Tips</h3>
+                    <ul>
+                        <li>Keep your resume to 1-2 pages maximum</li>
+                        <li>Use a clean, professional format</li>
+                        <li>Include relevant keywords from job descriptions</li>
+                        <li>Quantify your achievements with numbers</li>
+                        <li>Proofread for spelling and grammar errors</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Company Modal -->
+    <div class="modal" id="companyModal">
+        <div class="modal-content" style="max-width: 800px;">
+            <button class="close-modal" onclick="closeCompanyModal()">&times;</button>
+            <div id="companyModalContent">
+                <!-- Company details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample job data
+        const jobsData = [
+            {
+                id: 1,
+                title: "Senior Frontend Developer",
+                company: "TechCorp",
+                location: "San Francisco, CA",
+                type: "Full-time",
+                experience: "Senior",
+                industry: "Technology",
+                salary: "$120,000 - $160,000",
+                salaryRange: "100k-150k",
+                description: "We're looking for a passionate Senior Frontend Developer to join our growing team. You'll work on cutting-edge web applications using React, TypeScript, and modern development tools.",
+                requirements: ["5+ years React experience", "TypeScript proficiency", "Modern CSS frameworks", "Testing experience"],
+                posted: "2 days ago"
+            },
+            {
+                id: 2,
+                title: "Product Manager",
+                company: "InnovateLab",
+                location: "New York, NY",
+                type: "Full-time",
+                experience: "Mid",
+                industry: "Technology",
+                salary: "$90,000 - $130,000",
+                salaryRange: "50k-100k",
+                description: "Join our product team to drive innovation and deliver exceptional user experiences. You'll work closely with engineering, design, and business teams.",
+                requirements: ["3+ years product management", "Agile methodology", "Data-driven decision making", "Strong communication skills"],
+                posted: "1 day ago"
+            },
+            {
+                id: 3,
+                title: "UX/UI Designer",
+                company: "DesignStudio",
+                location: "Remote",
+                type: "Remote",
+                experience: "Mid",
+                industry: "Design",
+                salary: "$70,000 - $100,000",
+                salaryRange: "50k-100k",
+                description: "Create beautiful and intuitive user experiences for our digital products. Work with a talented team of designers and developers.",
+                requirements: ["Figma expertise", "User research experience", "Prototyping skills", "Design systems knowledge"],
+                posted: "3 days ago"
+            },
+            {
+                id: 4,
+                title: "Data Scientist",
+                company: "DataTech",
+                location: "Austin, TX",
+                type: "Full-time",
+                experience: "Senior",
+                industry: "Technology",
+                salary: "$110,000 - $150,000",
+                salaryRange: "100k-150k",
+                description: "Analyze complex datasets to drive business insights and build predictive models. Work with cutting-edge ML technologies.",
+                requirements: ["Python/R proficiency", "Machine learning expertise", "Statistical analysis", "SQL knowledge"],
+                posted: "1 week ago"
+            },
+            {
+                id: 5,
+                title: "Marketing Manager",
+                company: "GrowthCo",
+                location: "Los Angeles, CA",
+                type: "Full-time",
+                experience: "Mid",
+                industry: "Marketing",
+                salary: "$75,000 - $95,000",
+                salaryRange: "50k-100k",
+                description: "Lead marketing campaigns and drive customer acquisition. Work with a dynamic team to grow our brand presence.",
+                requirements: ["Digital marketing experience", "Campaign management", "Analytics tools", "Creative thinking"],
+                posted: "4 days ago"
+            },
+            {
+                id: 6,
+                title: "DevOps Engineer",
+                company: "CloudSys",
+                location: "Seattle, WA",
+                type: "Full-time",
+                experience: "Senior",
+                industry: "Technology",
+                salary: "$130,000 - $170,000",
+                salaryRange: "100k-150k",
+                description: "Build and maintain scalable cloud infrastructure. Work with modern DevOps tools and practices.",
+                requirements: ["AWS/Azure experience", "Kubernetes", "CI/CD pipelines", "Infrastructure as Code"],
+                posted: "5 days ago"
+            }
+        ];
+
+        const companiesData = [
+            { 
+                id: 1,
+                name: "TechCorp", 
+                jobs: 45, 
+                logo: "TC",
+                description: "TechCorp is a leading technology company specializing in innovative software solutions and cutting-edge web applications. We're passionate about creating products that make a difference in people's lives.",
+                founded: "2015",
+                employees: "500-1000",
+                location: "San Francisco, CA",
+                industry: "Technology",
+                website: "www.techcorp.com",
+                benefits: [
+                    { icon: "💰", text: "Competitive Salary" },
+                    { icon: "🏥", text: "Health Insurance" },
+                    { icon: "🏖️", text: "Unlimited PTO" },
+                    { icon: "💻", text: "Remote Work" },
+                    { icon: "📚", text: "Learning Budget" },
+                    { icon: "🍕", text: "Free Meals" }
+                ]
+            },
+            { 
+                id: 2,
+                name: "InnovateLab", 
+                jobs: 23, 
+                logo: "IL",
+                description: "InnovateLab is where creativity meets technology. We build next-generation products that solve real-world problems through innovative design and engineering excellence.",
+                founded: "2018",
+                employees: "200-500",
+                location: "New York, NY",
+                industry: "Technology",
+                website: "www.innovatelab.com",
+                benefits: [
+                    { icon: "💰", text: "Stock Options" },
+                    { icon: "🏥", text: "Premium Healthcare" },
+                    { icon: "🎯", text: "Flexible Hours" },
+                    { icon: "🚀", text: "Career Growth" },
+                    { icon: "🏋️", text: "Gym Membership" },
+                    { icon: "☕", text: "Coffee & Snacks" }
+                ]
+            },
+            { 
+                id: 3,
+                name: "DesignStudio", 
+                jobs: 18, 
+                logo: "DS",
+                description: "DesignStudio is a creative agency focused on delivering exceptional user experiences through thoughtful design and innovative digital solutions.",
+                founded: "2020",
+                employees: "50-200",
+                location: "Remote",
+                industry: "Design",
+                website: "www.designstudio.com",
+                benefits: [
+                    { icon: "🎨", text: "Creative Freedom" },
+                    { icon: "🏠", text: "Work From Home" },
+                    { icon: "💻", text: "Latest Equipment" },
+                    { icon: "🌍", text: "Global Team" },
+                    { icon: "📖", text: "Design Courses" },
+                    { icon: "🎉", text: "Team Events" }
+                ]
+            },
+            { 
+                id: 4,
+                name: "DataTech", 
+                jobs: 31, 
+                logo: "DT",
+                description: "DataTech transforms businesses through data science and machine learning. We help companies make data-driven decisions with our advanced analytics platform.",
+                founded: "2016",
+                employees: "300-500",
+                location: "Austin, TX",
+                industry: "Technology",
+                website: "www.datatech.com",
+                benefits: [
+                    { icon: "📊", text: "Data Access" },
+                    { icon: "🧠", text: "AI Training" },
+                    { icon: "💰", text: "Performance Bonus" },
+                    { icon: "🏥", text: "Health Benefits" },
+                    { icon: "🎓", text: "Conference Budget" },
+                    { icon: "🏖️", text: "Vacation Days" }
+                ]
+            },
+            { 
+                id: 5,
+                name: "GrowthCo", 
+                jobs: 12, 
+                logo: "GC",
+                description: "GrowthCo is a marketing technology company that helps businesses scale through innovative growth strategies and cutting-edge marketing automation.",
+                founded: "2019",
+                employees: "100-200",
+                location: "Los Angeles, CA",
+                industry: "Marketing",
+                website: "www.growthco.com",
+                benefits: [
+                    { icon: "📈", text: "Growth Opportunities" },
+                    { icon: "💡", text: "Innovation Time" },
+                    { icon: "🏥", text: "Health Coverage" },
+                    { icon: "🎯", text: "Goal Bonuses" },
+                    { icon: "🌴", text: "Paid Time Off" },
+                    { icon: "🍔", text: "Lunch Stipend" }
+                ]
+            },
+            { 
+                id: 6,
+                name: "CloudSys", 
+                jobs: 27, 
+                logo: "CS",
+                description: "CloudSys provides enterprise cloud infrastructure solutions. We help companies migrate, scale, and optimize their cloud operations with reliability and security.",
+                founded: "2017",
+                employees: "400-800",
+                location: "Seattle, WA",
+                industry: "Technology",
+                website: "www.cloudsys.com",
+                benefits: [
+                    { icon: "☁️", text: "Cloud Credits" },
+                    { icon: "🔒", text: "Security Training" },
+                    { icon: "💰", text: "Competitive Pay" },
+                    { icon: "🏥", text: "Full Benefits" },
+                    { icon: "📚", text: "Cert Reimbursement" },
+                    { icon: "⚡", text: "Fast Internet" }
+                ]
+            }
+        ];
+
+        let filteredJobs = [...jobsData];
+
+        // Initialize the application
+        function init() {
+            renderJobs(filteredJobs);
+            renderCompanies();
+            bindFilterEvents();
+            updateJobCount();
+        }
+
+        // Render jobs
+        function renderJobs(jobs) {
+            const jobsGrid = document.getElementById('jobsGrid');
+            
+            if (jobs.length === 0) {
+                jobsGrid.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; color: #64748b;">
+                        <h3>No jobs found</h3>
+                        <p>Try adjusting your filters or search criteria</p>
+                    </div>
+                `;
+                return;
+            }
+
+            jobsGrid.innerHTML = jobs.map(job => `
+                <div class="job-card" onclick="openJobModal(${job.id})">
+                    <div class="job-header">
+                        <div class="job-info">
+                            <h3 class="job-title">${job.title}</h3>
+                            <div class="company-name">${job.company}</div>
+                            <div class="job-location">
+                                📍 ${job.location}
+                            </div>
+                        </div>
+                        <div class="company-logo">
+                            ${job.company.substring(0, 2).toUpperCase()}
+                        </div>
+                    </div>
+                    
+                    <div class="job-details">
+                        <span class="job-tag type">${job.type}</span>
+                        <span class="job-tag">${job.experience} Level</span>
+                        <span class="job-tag salary">${job.salary}</span>
+                    </div>
+                    
+                    <div class="job-description">
+                        ${job.description.substring(0, 150)}...
+                    </div>
+                    
+                    <div class="job-footer">
+                        <span class="job-posted">Posted ${job.posted}</span>
+                        <button class="apply-btn" onclick="event.stopPropagation(); applyToJob(${job.id})">
+                            Apply Now
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render companies
+        function renderCompanies() {
+            const companiesGrid = document.getElementById('companiesGrid');
+            companiesGrid.innerHTML = companiesData.map(company => `
+                <div class="company-card" onclick="openCompanyModal(${company.id})">
+                    <div class="company-card-logo">${company.logo}</div>
+                    <h3>${company.name}</h3>
+                    <div class="company-jobs">${company.jobs} open positions</div>
+                </div>
+            `).join('');
+        }
+
+        // Bind filter events
+        function bindFilterEvents() {
+            const filters = ['jobTypeFilter', 'experienceFilter', 'industryFilter', 'salaryFilter'];
+            filters.forEach(filterId => {
+                document.getElementById(filterId).addEventListener('change', applyFilters);
+            });
+        }
+
+        // Apply filters
+        function applyFilters() {
+            const jobType = document.getElementById('jobTypeFilter').value;
+            const experience = document.getElementById('experienceFilter').value;
+            const industry = document.getElementById('industryFilter').value;
+            const salary = document.getElementById('salaryFilter').value;
+
+            filteredJobs = jobsData.filter(job => {
+                return (!jobType || job.type === jobType) &&
+                       (!experience || job.experience === experience) &&
+                       (!industry || job.industry === industry) &&
+                       (!salary || job.salaryRange === salary);
+            });
+
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                renderJobs(filteredJobs);
+                updateJobCount();
+            }, 800);
+        }
+
+        // Search jobs
+        function searchJobs() {
+            const jobSearch = document.getElementById('jobSearch').value.toLowerCase();
+            const locationSearch = document.getElementById('locationSearch').value.toLowerCase();
+
+            filteredJobs = jobsData.filter(job => {
+                const matchesJob = !jobSearch || 
+                    job.title.toLowerCase().includes(jobSearch) ||
+                    job.company.toLowerCase().includes(jobSearch) ||
+                    job.description.toLowerCase().includes(jobSearch);
+                
+                const matchesLocation = !locationSearch ||
+                    job.location.toLowerCase().includes(locationSearch);
+
+                return matchesJob && matchesLocation;
+            });
+
+            showLoading();
+            setTimeout(() => {
+                hideLoading();
+                renderJobs(filteredJobs);
+                updateJobCount();
+                document.querySelector('.main-content').scrollIntoView({ behavior: 'smooth' });
+            }, 1000);
+        }
+
+        // Open job modal
+        function openJobModal(jobId) {
+            const job = jobsData.find(j => j.id === jobId);
+            if (!job) return;
+
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="job-header">
+                    <div class="job-info">
+                        <h2 class="job-title">${job.title}</h2>
+                        <div class="company-name">${job.company}</div>
+                        <div class="job-location">📍 ${job.location}</div>
+                    </div>
+                    <div class="company-logo">
+                        ${job.company.substring(0, 2).toUpperCase()}
+                    </div>
+                </div>
+                
+                <div class="job-details">
+                    <span class="job-tag type">${job.type}</span>
+                    <span class="job-tag">${job.experience} Level</span>
+                    <span class="job-tag salary">${job.salary}</span>
+                </div>
+                
+                <h3>Job Description</h3>
+                <p>${job.description}</p>
+                
+                <h3>Requirements</h3>
+                <ul>
+                    ${job.requirements.map(req => `<li>${req}</li>`).join('')}
+                </ul>
+                
+                <div style="margin-top: 2rem;">
+                    <button class="btn-primary" onclick="applyToJob(${job.id})" style="width: 100%; padding: 1rem;">
+                        Apply for this Position
+                    </button>
+                </div>
+            `;
+
+            document.getElementById('jobModal').style.display = 'block';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('jobModal').style.display = 'none';
+        }
+
+        // Apply to job
+        function applyToJob(jobId) {
+            const job = jobsData.find(j => j.id === jobId);
+            alert(`Thank you for your interest in the ${job.title} position at ${job.company}! Your application has been submitted.`);
+            closeModal();
+        }
+
+        // Show/hide loading
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('jobsGrid').style.display = 'none';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('jobsGrid').style.display = 'grid';
+        }
+
+        // Update job count
+        function updateJobCount() {
+            document.getElementById('totalJobs').textContent = filteredJobs.length.toLocaleString();
+        }
+
+        // Authentication Functions
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function openSignupModal() {
+            document.getElementById('signupModal').style.display = 'block';
+        }
+
+        function closeAuthModal() {
+            document.getElementById('loginModal').style.display = 'none';
+            document.getElementById('signupModal').style.display = 'none';
+        }
+
+        function switchToSignup() {
+            closeAuthModal();
+            setTimeout(() => openSignupModal(), 100);
+        }
+
+        function switchToLogin() {
+            closeAuthModal();
+            setTimeout(() => openLoginModal(), 100);
+        }
+
+        function socialLogin(provider) {
+            alert(`${provider.charAt(0).toUpperCase() + provider.slice(1)} login would be implemented here. This is a demo version.`);
+        }
+
+        function showForgotPassword() {
+            alert('Password reset functionality would be implemented here. This is a demo version.');
+        }
+
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Dummy credentials for demo
+            const validCredentials = [
+                { email: 'demo@talenthub.com', password: 'demo123' },
+                { email: 'john.doe@email.com', password: 'password' },
+                { email: 'admin@talenthub.com', password: 'admin123' }
+            ];
+            
+            const isValidLogin = validCredentials.some(cred => 
+                cred.email === email && cred.password === password
+            );
+            
+            if (email && password) {
+                // Simulate login process
+                const loginBtn = this.querySelector('.auth-btn');
+                const originalText = loginBtn.textContent;
+                loginBtn.textContent = 'Signing In...';
+                loginBtn.disabled = true;
+                
+                setTimeout(() => {
+                    if (isValidLogin) {
+                        alert(`Welcome back! You've successfully signed in as ${email}`);
+                        closeAuthModal();
+                        
+                        // Update UI to show logged in state
+                        updateAuthUI(email);
+                        
+                        this.reset();
+                    } else {
+                        alert('Invalid credentials! Try:\n\nEmail: demo@talenthub.com\nPassword: demo123\n\nOr:\n\nEmail: john.doe@email.com\nPassword: password');
+                    }
+                    
+                    loginBtn.textContent = originalText;
+                    loginBtn.disabled = false;
+                }, 1500);
+            }
+        });
+
+        // Handle signup form submission
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const agreeTerms = document.getElementById('agreeTerms').checked;
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                alert('Passwords do not match. Please try again.');
+                return;
+            }
+            
+            if (!agreeTerms) {
+                alert('Please agree to the Terms of Service and Privacy Policy.');
+                return;
+            }
+            
+            if (name && email && password) {
+                // Simulate signup process
+                const signupBtn = this.querySelector('.auth-btn');
+                const originalText = signupBtn.textContent;
+                signupBtn.textContent = 'Creating Account...';
+                signupBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert(`Welcome to TalentHub, ${name}! Your account has been created successfully.`);
+                    closeAuthModal();
+                    
+                    // Update UI to show logged in state
+                    updateAuthUI(email);
+                    
+                    signupBtn.textContent = originalText;
+                    signupBtn.disabled = false;
+                    this.reset();
+                }, 2000);
+            }
+        });
+
+        // Update UI after login/signup
+        function updateAuthUI(email) {
+            const authButtons = document.getElementById('authButtons');
+            const profileMenu = document.getElementById('profileMenu');
+            const name = email.split('@')[0].replace(/[._]/g, ' ');
+            const nameParts = name.split(' ');
+            const initials = nameParts.map(part => part.charAt(0)).join('').substring(0, 2).toUpperCase();
+            const displayName = nameParts.map(part => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
+            
+            // Hide auth buttons and show profile menu
+            authButtons.style.display = 'none';
+            profileMenu.style.display = 'flex';
+            
+            // Update profile information in header
+            document.getElementById('profileInitials').textContent = initials;
+            document.getElementById('profileName').textContent = displayName;
+            
+            // Update sidebar information
+            document.getElementById('sidebarInitials').textContent = initials;
+            document.getElementById('sidebarName').textContent = displayName;
+            document.getElementById('sidebarEmail').textContent = email;
+            
+            // Store user data
+            window.currentUser = {
+                email: email,
+                name: displayName,
+                initials: initials
+            };
+        }
+
+        // Logout function
+        function logout() {
+            const authButtons = document.getElementById('authButtons');
+            const profileMenu = document.getElementById('profileMenu');
+            
+            // Show auth buttons and hide profile menu
+            authButtons.style.display = 'flex';
+            profileMenu.style.display = 'none';
+            
+            // Clear user data
+            window.currentUser = null;
+            
+            alert('You have been logged out successfully.');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const jobModal = document.getElementById('jobModal');
+            const loginModal = document.getElementById('loginModal');
+            const signupModal = document.getElementById('signupModal');
+            
+            if (event.target === jobModal) {
+                closeModal();
+            } else if (event.target === loginModal || event.target === signupModal) {
+                closeAuthModal();
+            }
+        }
+
+        // Mobile Menu Functions
+        function toggleMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.remove('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (!mobileNav.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                mobileNav.classList.remove('active');
+            }
+        });
+
+        // Sidebar Functions
+        function toggleSidebar() {
+            const sidebar = document.getElementById('profileSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('profileSidebar');
+            const overlay = document.getElementById('sidebarOverlay');
+            
+            sidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        function showNotifications() {
+            alert('📬 Notifications:\n\n• New job match: Senior Developer at TechCorp\n• Application update: Interview scheduled for Product Manager role\n• 5 new companies viewed your profile this week');
+        }
+
+        function showHelp() {
+            alert('🆘 Help & Support:\n\nFor assistance, please contact:\n📧 support@talenthub.com\n📞 1-800-TALENT\n\nOr visit our Help Center for FAQs and guides.');
+        }
+
+        function openProfileModal() {
+            document.getElementById('profileModal').style.display = 'block';
+            
+            // Pre-fill form with current user data if available
+            if (window.currentUser) {
+                const nameParts = window.currentUser.name.split(' ');
+                document.getElementById('profileFirstName').value = nameParts[0] || '';
+                document.getElementById('profileLastName').value = nameParts.slice(1).join(' ') || '';
+                document.getElementById('profileEmailEdit').value = window.currentUser.email || '';
+            }
+        }
+
+        function closeProfileModal() {
+            document.getElementById('profileModal').style.display = 'none';
+        }
+
+        function openResumeModal() {
+            document.getElementById('resumeModal').style.display = 'block';
+        }
+
+        function closeResumeModal() {
+            document.getElementById('resumeModal').style.display = 'none';
+        }
+
+        function openSettingsModal() {
+            alert('Settings functionality would be implemented here. This includes notification preferences, privacy settings, and account management.');
+        }
+
+        function viewApplications() {
+            alert('My Applications page would show all your job applications with their current status (Applied, Under Review, Interview Scheduled, etc.)');
+        }
+
+        function viewSavedJobs() {
+            alert('Saved Jobs page would display all the jobs you\'ve bookmarked for later review.');
+        }
+
+        // Profile form submission
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                firstName: document.getElementById('profileFirstName').value,
+                lastName: document.getElementById('profileLastName').value,
+                email: document.getElementById('profileEmailEdit').value,
+                phone: document.getElementById('profilePhone').value,
+                location: document.getElementById('profileLocation').value,
+                title: document.getElementById('profileTitle').value,
+                company: document.getElementById('profileCompany').value,
+                experience: document.getElementById('profileExperience').value,
+                salary: document.getElementById('profileSalary').value,
+                skills: document.getElementById('profileSkills').value,
+                bio: document.getElementById('profileBio').value
+            };
+            
+            // Simulate saving profile
+            const saveBtn = this.querySelector('.btn-primary');
+            const originalText = saveBtn.textContent;
+            saveBtn.textContent = 'Saving...';
+            saveBtn.disabled = true;
+            
+            setTimeout(() => {
+                // Update user display name if changed
+                if (formData.firstName && window.currentUser) {
+                    const newName = `${formData.firstName} ${formData.lastName}`.trim();
+                    const newInitials = (formData.firstName.charAt(0) + (formData.lastName.charAt(0) || '')).toUpperCase();
+                    
+                    document.getElementById('profileName').textContent = newName;
+                    document.getElementById('profileNameLarge').textContent = newName;
+                    document.getElementById('profileInitials').textContent = newInitials;
+                    document.getElementById('profileInitialsLarge').textContent = newInitials;
+                    
+                    window.currentUser.name = newName;
+                    window.currentUser.initials = newInitials;
+                }
+                
+                alert('Profile updated successfully!');
+                closeProfileModal();
+                
+                saveBtn.textContent = originalText;
+                saveBtn.disabled = false;
+            }, 1500);
+        });
+
+        // Resume upload functionality
+        document.getElementById('resumeFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleResumeUpload(file);
+            }
+        });
+
+        // Drag and drop for resume upload
+        const uploadArea = document.getElementById('uploadArea');
+        
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                const file = files[0];
+                if (file.type === 'application/pdf' || file.name.endsWith('.doc') || file.name.endsWith('.docx')) {
+                    handleResumeUpload(file);
+                } else {
+                    alert('Please upload a PDF, DOC, or DOCX file.');
+                }
+            }
+        });
+
+        function handleResumeUpload(file) {
+            // Check file size (5MB limit)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size must be less than 5MB.');
+                return;
+            }
+            
+            // Simulate upload process
+            const uploadArea = document.getElementById('uploadArea');
+            const currentResume = document.getElementById('currentResume');
+            
+            uploadArea.innerHTML = `
+                <div class="upload-icon">⏳</div>
+                <h3>Uploading...</h3>
+                <p>Please wait while we process your resume</p>
+            `;
+            
+            setTimeout(() => {
+                // Show uploaded resume
+                document.getElementById('resumeName').textContent = file.name;
+                document.getElementById('resumeSize').textContent = (file.size / (1024 * 1024)).toFixed(1) + ' MB';
+                document.getElementById('resumeDate').textContent = 'Uploaded just now';
+                
+                currentResume.style.display = 'block';
+                
+                // Reset upload area
+                uploadArea.innerHTML = `
+                    <div class="upload-icon">✅</div>
+                    <h3>Resume Uploaded Successfully!</h3>
+                    <p>Your resume has been saved and is ready to use for job applications</p>
+                    <button type="button" class="btn-primary" onclick="document.getElementById('resumeFile').click()">
+                        Upload New Resume
+                    </button>
+                `;
+                
+                alert('Resume uploaded successfully!');
+            }, 2000);
+        }
+
+        function downloadResume() {
+            alert('Resume download would be implemented here. In a real application, this would download the uploaded file.');
+        }
+
+        function deleteResume() {
+            if (confirm('Are you sure you want to delete your resume? This action cannot be undone.')) {
+                document.getElementById('currentResume').style.display = 'none';
+                
+                // Reset upload area
+                const uploadArea = document.getElementById('uploadArea');
+                uploadArea.innerHTML = `
+                    <div class="upload-icon">📄</div>
+                    <h3>Upload Your Resume</h3>
+                    <p>Drag and drop your resume here, or click to browse</p>
+                    <p class="upload-formats">Supported formats: PDF, DOC, DOCX (Max 5MB)</p>
+                    <button type="button" class="btn-primary" onclick="document.getElementById('resumeFile').click()">
+                        Choose File
+                    </button>
+                `;
+                
+                alert('Resume deleted successfully.');
+            }
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileNav = document.getElementById('mobileNav');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            
+            // Close mobile menu
+            if (!mobileNav.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                mobileNav.classList.remove('active');
+            }
+        });
+
+        // Company Modal Functions
+        function openCompanyModal(companyId) {
+            const company = companiesData.find(c => c.id === companyId);
+            if (!company) return;
+
+            // Get jobs for this company
+            const companyJobs = jobsData.filter(job => job.company === company.name);
+
+            const modalContent = document.getElementById('companyModalContent');
+            modalContent.innerHTML = `
+                <div class="company-modal-header">
+                    <div class="company-logo-large">${company.logo}</div>
+                    <div class="company-header-info">
+                        <h2>${company.name}</h2>
+                        <div class="company-stats">
+                            <div class="company-stat">
+                                <span class="company-stat-number">${company.jobs}</span>
+                                <span class="company-stat-label">Open Jobs</span>
+                            </div>
+                            <div class="company-stat">
+                                <span class="company-stat-number">${company.employees}</span>
+                                <span class="company-stat-label">Employees</span>
+                            </div>
+                            <div class="company-stat">
+                                <span class="company-stat-number">${company.founded}</span>
+                                <span class="company-stat-label">Founded</span>
+                            </div>
+                        </div>
+                        <p style="color: #64748b; margin: 0;">
+                            📍 ${company.location} • 🌐 ${company.website} • 🏢 ${company.industry}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="company-section">
+                    <h3>About ${company.name}</h3>
+                    <p class="company-description">${company.description}</p>
+                </div>
+
+                <div class="company-section">
+                    <h3>Benefits & Perks</h3>
+                    <div class="company-benefits">
+                        ${company.benefits.map(benefit => `
+                            <div class="benefit-item">
+                                <span class="benefit-icon">${benefit.icon}</span>
+                                <span class="benefit-text">${benefit.text}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="company-section">
+                    <h3>Open Positions (${companyJobs.length})</h3>
+                    <div class="company-jobs-list">
+                        ${companyJobs.length > 0 ? companyJobs.map(job => `
+                            <div class="company-job-item" onclick="event.stopPropagation(); openJobModal(${job.id}); closeCompanyModal();">
+                                <div class="company-job-info">
+                                    <div class="company-job-title">${job.title}</div>
+                                    <div class="company-job-details">
+                                        <span class="company-job-tag">${job.type}</span>
+                                        <span class="company-job-tag">${job.experience} Level</span>
+                                        <span class="company-job-tag company-job-salary">${job.salary}</span>
+                                        <span class="company-job-tag">📍 ${job.location}</span>
+                                    </div>
+                                </div>
+                                <button class="company-apply-btn" onclick="event.stopPropagation(); applyToJob(${job.id}); closeCompanyModal();">
+                                    Apply Now
+                                </button>
+                            </div>
+                        `).join('') : `
+                            <div style="text-align: center; padding: 2rem; color: #64748b;">
+                                <h4>No current openings</h4>
+                                <p>Check back later for new opportunities at ${company.name}</p>
+                            </div>
+                        `}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('companyModal').style.display = 'block';
+        }
+
+        function closeCompanyModal() {
+            document.getElementById('companyModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const jobModal = document.getElementById('jobModal');
+            const loginModal = document.getElementById('loginModal');
+            const signupModal = document.getElementById('signupModal');
+            const profileModal = document.getElementById('profileModal');
+            const resumeModal = document.getElementById('resumeModal');
+            const companyModal = document.getElementById('companyModal');
+            
+            if (event.target === jobModal) {
+                closeModal();
+            } else if (event.target === loginModal || event.target === signupModal) {
+                closeAuthModal();
+            } else if (event.target === profileModal) {
+                closeProfileModal();
+            } else if (event.target === resumeModal) {
+                closeResumeModal();
+            } else if (event.target === companyModal) {
+                closeCompanyModal();
+            }
+        }
+
+        // Profile Data Storage
+        let workExperiences = [];
+        let educationEntries = [];
+        let projects = [];
+        let experienceCounter = 0;
+        let educationCounter = 0;
+        let projectCounter = 0;
+
+        // Work Experience Functions
+        function addWorkExperience() {
+            const workList = document.getElementById('workExperienceList');
+            const id = `work_${experienceCounter++}`;
+            
+            const formHTML = `
+                <div class="experience-form" id="${id}">
+                    <h4 style="margin-bottom: 1rem; color: #1a202c;">Add Work Experience</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Job Title</label>
+                            <input type="text" class="form-input" id="${id}_title" placeholder="e.g., Senior Software Engineer" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Company</label>
+                            <input type="text" class="form-input" id="${id}_company" placeholder="e.g., Google Inc." required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input type="month" class="form-input" id="${id}_start" required>
+                        </div>
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="month" class="form-input" id="${id}_end" placeholder="Leave blank if current">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" class="form-input" id="${id}_location" placeholder="e.g., San Francisco, CA or Remote">
+                    </div>
+                    <div class="form-group">
+                        <label>Job Description</label>
+                        <textarea class="form-input" id="${id}_description" rows="4" placeholder="Describe your responsibilities, achievements, and key projects..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="cancelWorkExperience('${id}')">Cancel</button>
+                        <button type="button" class="btn-save" onclick="saveWorkExperience('${id}')">Save Experience</button>
+                    </div>
+                </div>
+            `;
+            
+            workList.insertAdjacentHTML('beforeend', formHTML);
+            document.getElementById(`${id}_title`).focus();
+        }
+
+        function saveWorkExperience(id) {
+            const title = document.getElementById(`${id}_title`).value;
+            const company = document.getElementById(`${id}_company`).value;
+            const start = document.getElementById(`${id}_start`).value;
+            const end = document.getElementById(`${id}_end`).value;
+            const location = document.getElementById(`${id}_location`).value;
+            const description = document.getElementById(`${id}_description`).value;
+            
+            if (!title || !company || !start) {
+                alert('Please fill in all required fields (Job Title, Company, Start Date)');
+                return;
+            }
+            
+            const experience = {
+                id: id,
+                title: title,
+                company: company,
+                start: start,
+                end: end || 'Present',
+                location: location,
+                description: description
+            };
+            
+            workExperiences.push(experience);
+            renderWorkExperience(experience);
+            document.getElementById(id).remove();
+        }
+
+        function cancelWorkExperience(id) {
+            document.getElementById(id).remove();
+        }
+
+        function renderWorkExperience(experience) {
+            const workList = document.getElementById('workExperienceList');
+            const startDate = new Date(experience.start + '-01').toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+            const endDate = experience.end === 'Present' ? 'Present' : new Date(experience.end + '-01').toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+            
+            const itemHTML = `
+                <div class="experience-item" id="item_${experience.id}">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">${experience.title}</div>
+                            <div class="experience-company">${experience.company}</div>
+                            <div class="experience-duration">${startDate} - ${endDate} ${experience.location ? '• ' + experience.location : ''}</div>
+                        </div>
+                        <div class="experience-actions">
+                            <button class="btn-icon" onclick="editWorkExperience('${experience.id}')" title="Edit">✏️</button>
+                            <button class="btn-icon delete" onclick="deleteWorkExperience('${experience.id}')" title="Delete">🗑️</button>
+                        </div>
+                    </div>
+                    ${experience.description ? `<div class="experience-description">${experience.description}</div>` : ''}
+                </div>
+            `;
+            
+            workList.insertAdjacentHTML('beforeend', itemHTML);
+        }
+
+        function editWorkExperience(id) {
+            const experience = workExperiences.find(exp => exp.id === id);
+            if (!experience) return;
+            
+            document.getElementById(`item_${id}`).remove();
+            
+            const workList = document.getElementById('workExperienceList');
+            const formHTML = `
+                <div class="experience-form" id="edit_${id}">
+                    <h4 style="margin-bottom: 1rem; color: #1a202c;">Edit Work Experience</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Job Title</label>
+                            <input type="text" class="form-input" id="edit_${id}_title" value="${experience.title}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Company</label>
+                            <input type="text" class="form-input" id="edit_${id}_company" value="${experience.company}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input type="month" class="form-input" id="edit_${id}_start" value="${experience.start}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="month" class="form-input" id="edit_${id}_end" value="${experience.end === 'Present' ? '' : experience.end}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" class="form-input" id="edit_${id}_location" value="${experience.location || ''}">
+                    </div>
+                    <div class="form-group">
+                        <label>Job Description</label>
+                        <textarea class="form-input" id="edit_${id}_description" rows="4">${experience.description || ''}</textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="cancelEditWorkExperience('${id}')">Cancel</button>
+                        <button type="button" class="btn-save" onclick="updateWorkExperience('${id}')">Update Experience</button>
+                    </div>
+                </div>
+            `;
+            
+            workList.insertAdjacentHTML('beforeend', formHTML);
+        }
+
+        function updateWorkExperience(id) {
+            const title = document.getElementById(`edit_${id}_title`).value;
+            const company = document.getElementById(`edit_${id}_company`).value;
+            const start = document.getElementById(`edit_${id}_start`).value;
+            const end = document.getElementById(`edit_${id}_end`).value;
+            const location = document.getElementById(`edit_${id}_location`).value;
+            const description = document.getElementById(`edit_${id}_description`).value;
+            
+            if (!title || !company || !start) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            const experienceIndex = workExperiences.findIndex(exp => exp.id === id);
+            if (experienceIndex !== -1) {
+                workExperiences[experienceIndex] = {
+                    id: id,
+                    title: title,
+                    company: company,
+                    start: start,
+                    end: end || 'Present',
+                    location: location,
+                    description: description
+                };
+                
+                document.getElementById(`edit_${id}`).remove();
+                renderWorkExperience(workExperiences[experienceIndex]);
+            }
+        }
+
+        function cancelEditWorkExperience(id) {
+            const experience = workExperiences.find(exp => exp.id === id);
+            document.getElementById(`edit_${id}`).remove();
+            renderWorkExperience(experience);
+        }
+
+        function deleteWorkExperience(id) {
+            if (confirm('Are you sure you want to delete this work experience?')) {
+                workExperiences = workExperiences.filter(exp => exp.id !== id);
+                document.getElementById(`item_${id}`).remove();
+            }
+        }
+
+        // Education Functions
+        function addEducation() {
+            const educationList = document.getElementById('educationList');
+            const id = `edu_${educationCounter++}`;
+            
+            const formHTML = `
+                <div class="experience-form" id="${id}">
+                    <h4 style="margin-bottom: 1rem; color: #1a202c;">Add Education</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Degree</label>
+                            <input type="text" class="form-input" id="${id}_degree" placeholder="e.g., Bachelor of Science in Computer Science" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Institution</label>
+                            <input type="text" class="form-input" id="${id}_school" placeholder="e.g., Stanford University" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Start Year</label>
+                            <input type="number" class="form-input" id="${id}_start" min="1950" max="2030" placeholder="2018" required>
+                        </div>
+                        <div class="form-group">
+                            <label>End Year</label>
+                            <input type="number" class="form-input" id="${id}_end" min="1950" max="2030" placeholder="2022">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>GPA (Optional)</label>
+                            <input type="text" class="form-input" id="${id}_gpa" placeholder="e.g., 3.8/4.0">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" class="form-input" id="${id}_location" placeholder="e.g., Stanford, CA">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Description (Optional)</label>
+                        <textarea class="form-input" id="${id}_description" rows="3" placeholder="Relevant coursework, achievements, activities..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="cancelEducation('${id}')">Cancel</button>
+                        <button type="button" class="btn-save" onclick="saveEducation('${id}')">Save Education</button>
+                    </div>
+                </div>
+            `;
+            
+            educationList.insertAdjacentHTML('beforeend', formHTML);
+            document.getElementById(`${id}_degree`).focus();
+        }
+
+        function saveEducation(id) {
+            const degree = document.getElementById(`${id}_degree`).value;
+            const school = document.getElementById(`${id}_school`).value;
+            const start = document.getElementById(`${id}_start`).value;
+            const end = document.getElementById(`${id}_end`).value;
+            const gpa = document.getElementById(`${id}_gpa`).value;
+            const location = document.getElementById(`${id}_location`).value;
+            const description = document.getElementById(`${id}_description`).value;
+            
+            if (!degree || !school || !start) {
+                alert('Please fill in all required fields (Degree, Institution, Start Year)');
+                return;
+            }
+            
+            const education = {
+                id: id,
+                degree: degree,
+                school: school,
+                start: start,
+                end: end || 'Present',
+                gpa: gpa,
+                location: location,
+                description: description
+            };
+            
+            educationEntries.push(education);
+            renderEducation(education);
+            document.getElementById(id).remove();
+        }
+
+        function cancelEducation(id) {
+            document.getElementById(id).remove();
+        }
+
+        function renderEducation(education) {
+            const educationList = document.getElementById('educationList');
+            const duration = education.end === 'Present' ? `${education.start} - Present` : `${education.start} - ${education.end}`;
+            
+            const itemHTML = `
+                <div class="experience-item" id="item_${education.id}">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">${education.degree}</div>
+                            <div class="experience-company">${education.school}</div>
+                            <div class="experience-duration">${duration} ${education.gpa ? '• GPA: ' + education.gpa : ''} ${education.location ? '• ' + education.location : ''}</div>
+                        </div>
+                        <div class="experience-actions">
+                            <button class="btn-icon" onclick="editEducation('${education.id}')" title="Edit">✏️</button>
+                            <button class="btn-icon delete" onclick="deleteEducation('${education.id}')" title="Delete">🗑️</button>
+                        </div>
+                    </div>
+                    ${education.description ? `<div class="experience-description">${education.description}</div>` : ''}
+                </div>
+            `;
+            
+            educationList.insertAdjacentHTML('beforeend', itemHTML);
+        }
+
+        function editEducation(id) {
+            // Similar to editWorkExperience but for education
+            alert('Edit education functionality would be implemented here with similar pattern to work experience editing.');
+        }
+
+        function deleteEducation(id) {
+            if (confirm('Are you sure you want to delete this education entry?')) {
+                educationEntries = educationEntries.filter(edu => edu.id !== id);
+                document.getElementById(`item_${id}`).remove();
+            }
+        }
+
+        // Project Functions
+        function addProject() {
+            const projectsList = document.getElementById('projectsList');
+            const id = `proj_${projectCounter++}`;
+            
+            const formHTML = `
+                <div class="experience-form" id="${id}">
+                    <h4 style="margin-bottom: 1rem; color: #1a202c;">Add Project</h4>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Project Name</label>
+                            <input type="text" class="form-input" id="${id}_name" placeholder="e.g., E-commerce Web Application" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Project Type</label>
+                            <select class="form-input" id="${id}_type">
+                                <option value="">Select type</option>
+                                <option value="Personal">Personal Project</option>
+                                <option value="Professional">Professional Project</option>
+                                <option value="Academic">Academic Project</option>
+                                <option value="Open Source">Open Source</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Start Date</label>
+                            <input type="month" class="form-input" id="${id}_start" required>
+                        </div>
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="month" class="form-input" id="${id}_end" placeholder="Leave blank if ongoing">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Live Demo URL (Optional)</label>
+                            <input type="url" class="form-input" id="${id}_demo" placeholder="https://myproject.com">
+                        </div>
+                        <div class="form-group">
+                            <label>GitHub URL (Optional)</label>
+                            <input type="url" class="form-input" id="${id}_github" placeholder="https://github.com/username/project">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Technologies Used</label>
+                        <input type="text" class="form-input" id="${id}_tech" placeholder="e.g., React, Node.js, MongoDB, AWS (comma separated)">
+                    </div>
+                    <div class="form-group">
+                        <label>Project Description</label>
+                        <textarea class="form-input" id="${id}_description" rows="4" placeholder="Describe the project, your role, key features, and achievements..." required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="cancelProject('${id}')">Cancel</button>
+                        <button type="button" class="btn-save" onclick="saveProject('${id}')">Save Project</button>
+                    </div>
+                </div>
+            `;
+            
+            projectsList.insertAdjacentHTML('beforeend', formHTML);
+            document.getElementById(`${id}_name`).focus();
+        }
+
+        function saveProject(id) {
+            const name = document.getElementById(`${id}_name`).value;
+            const type = document.getElementById(`${id}_type`).value;
+            const start = document.getElementById(`${id}_start`).value;
+            const end = document.getElementById(`${id}_end`).value;
+            const demo = document.getElementById(`${id}_demo`).value;
+            const github = document.getElementById(`${id}_github`).value;
+            const tech = document.getElementById(`${id}_tech`).value;
+            const description = document.getElementById(`${id}_description`).value;
+            
+            if (!name || !start || !description) {
+                alert('Please fill in all required fields (Project Name, Start Date, Description)');
+                return;
+            }
+            
+            const project = {
+                id: id,
+                name: name,
+                type: type,
+                start: start,
+                end: end || 'Ongoing',
+                demo: demo,
+                github: github,
+                tech: tech,
+                description: description
+            };
+            
+            projects.push(project);
+            renderProject(project);
+            document.getElementById(id).remove();
+        }
+
+        function cancelProject(id) {
+            document.getElementById(id).remove();
+        }
+
+        function renderProject(project) {
+            const projectsList = document.getElementById('projectsList');
+            const startDate = new Date(project.start + '-01').toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+            const endDate = project.end === 'Ongoing' ? 'Ongoing' : new Date(project.end + '-01').toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+            
+            const technologies = project.tech ? project.tech.split(',').map(tech => `<span class="tech-tag">${tech.trim()}</span>`).join('') : '';
+            
+            const links = [];
+            if (project.demo) links.push(`<a href="${project.demo}" class="project-link" target="_blank" rel="noopener noreferrer">🔗 Live Demo</a>`);
+            if (project.github) links.push(`<a href="${project.github}" class="project-link" target="_blank" rel="noopener noreferrer">📁 GitHub</a>`);
+            
+            const itemHTML = `
+                <div class="experience-item" id="item_${project.id}">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">${project.name}</div>
+                            <div class="experience-company">${project.type || 'Project'}</div>
+                            <div class="experience-duration">${startDate} - ${endDate}</div>
+                            ${links.length > 0 ? `<div class="project-links">${links.join('')}</div>` : ''}
+                        </div>
+                        <div class="experience-actions">
+                            <button class="btn-icon" onclick="editProject('${project.id}')" title="Edit">✏️</button>
+                            <button class="btn-icon delete" onclick="deleteProject('${project.id}')" title="Delete">🗑️</button>
+                        </div>
+                    </div>
+                    <div class="experience-description">${project.description}</div>
+                    ${technologies ? `<div class="project-technologies">${technologies}</div>` : ''}
+                </div>
+            `;
+            
+            projectsList.insertAdjacentHTML('beforeend', itemHTML);
+        }
+
+        function editProject(id) {
+            alert('Edit project functionality would be implemented here with similar pattern to work experience editing.');
+        }
+
+        function deleteProject(id) {
+            if (confirm('Are you sure you want to delete this project?')) {
+                projects = projects.filter(proj => proj.id !== id);
+                document.getElementById(`item_${id}`).remove();
+            }
+        }
+
+        // Profile Resume Upload Functions
+        document.getElementById('profileResumeFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handleProfileResumeUpload(file);
+            }
+        });
+
+        function handleProfileResumeUpload(file) {
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size must be less than 5MB.');
+                return;
+            }
+            
+            const uploadArea = document.getElementById('profileUploadArea');
+            const currentResume = document.getElementById('profileCurrentResume');
+            
+            uploadArea.innerHTML = `
+                <div class="upload-icon-mini">⏳</div>
+                <div class="upload-text">
+                    <h4>Uploading...</h4>
+                    <p>Please wait</p>
+                </div>
+            `;
+            
+            setTimeout(() => {
+                document.getElementById('profileResumeName').textContent = file.name;
+                document.getElementById('profileResumeSize').textContent = (file.size / (1024 * 1024)).toFixed(1) + ' MB';
+                document.getElementById('profileResumeDate').textContent = 'Uploaded just now';
+                
+                currentResume.style.display = 'flex';
+                
+                uploadArea.innerHTML = `
+                    <div class="upload-icon-mini">✅</div>
+                    <div class="upload-text">
+                        <h4>Resume Uploaded</h4>
+                        <p>Ready to use</p>
+                    </div>
+                    <button type="button" class="btn-outline" onclick="document.getElementById('profileResumeFile').click()">
+                        Replace
+                    </button>
+                `;
+            }, 1500);
+        }
+
+        function downloadProfileResume() {
+            alert('Resume download would be implemented here.');
+        }
+
+        function deleteProfileResume() {
+            if (confirm('Are you sure you want to delete your resume?')) {
+                document.getElementById('profileCurrentResume').style.display = 'none';
+                
+                const uploadArea = document.getElementById('profileUploadArea');
+                uploadArea.innerHTML = `
+                    <div class="upload-icon-mini">📄</div>
+                    <div class="upload-text">
+                        <h4>Upload Resume</h4>
+                        <p>PDF, DOC, DOCX (Max 5MB)</p>
+                    </div>
+                    <button type="button" class="btn-outline" onclick="document.getElementById('profileResumeFile').click()">
+                        Choose File
+                    </button>
+                `;
+            }
+        }
+
+        // Initialize the app
+        init();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'986d0440464731c4',t:'MTc1OTE2NTAxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

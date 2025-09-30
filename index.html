@@ -2343,6 +2343,403 @@
             color: white;
         }
 
+        /* Notification System */
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 3000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 400px;
+        }
+
+        .notification {
+            background: white;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid #667eea;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            animation: slideInRight 0.3s ease;
+            position: relative;
+            max-width: 100%;
+            word-wrap: break-word;
+        }
+
+        .notification.success {
+            border-left-color: #10b981;
+        }
+
+        .notification.error {
+            border-left-color: #ef4444;
+        }
+
+        .notification.warning {
+            border-left-color: #f59e0b;
+        }
+
+        .notification.info {
+            border-left-color: #3b82f6;
+        }
+
+        .notification-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .notification-message {
+            color: #64748b;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .notification-close:hover {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .notification.removing {
+            animation: slideOutRight 0.3s ease forwards;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* Apply Button Animation */
+        .apply-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .apply-btn.applying {
+            background: #10b981;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+
+        .apply-btn.applied {
+            background: #10b981;
+            color: white;
+            pointer-events: none;
+        }
+
+        .apply-btn .btn-text {
+            transition: all 0.3s ease;
+        }
+
+        .apply-btn.applying .btn-text {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        .apply-btn .btn-loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .apply-btn.applying .btn-loader {
+            opacity: 1;
+        }
+
+        .apply-btn .btn-success {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .apply-btn.applied .btn-success {
+            opacity: 1;
+        }
+
+        .apply-btn.applied .btn-text {
+            opacity: 0;
+        }
+
+        /* Admin Panel Styles */
+        .admin-panel {
+            background: #f8fafc;
+            border: 2px solid #e0e7ff;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .admin-title {
+            color: #1a202c;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-admin {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-admin:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+
+        .btn-admin.secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-admin.secondary:hover {
+            background: #e5e7eb;
+        }
+
+        .admin-job-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .admin-job-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .admin-job-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-job-info {
+            flex: 1;
+        }
+
+        .admin-job-title {
+            font-weight: 600;
+            color: #1a202c;
+            margin-bottom: 0.25rem;
+        }
+
+        .admin-job-meta {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .admin-job-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-admin-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.85rem;
+            border-radius: 6px;
+        }
+
+        /* Job Form Modal */
+        .job-form-modal .modal-content {
+            max-width: 800px;
+        }
+
+        .job-form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .job-form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .job-form-section h3 {
+            color: #1a202c;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .job-form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .job-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .job-form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #374151;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .job-form-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .job-form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .job-form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .job-form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        /* Mobile Responsive for Notifications */
+        @media (max-width: 768px) {
+            .notification-container {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+
+            .notification {
+                padding: 1rem;
+            }
+
+            .admin-panel {
+                padding: 1.5rem;
+            }
+
+            .admin-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .admin-actions {
+                justify-content: center;
+            }
+
+            .admin-job-item {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .admin-job-actions {
+                justify-content: center;
+            }
+
+            .job-form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .job-form-actions {
+                flex-direction: column;
+            }
+        }
+
         /* Footer Responsive */
         @media (max-width: 1024px) {
             .footer-content {
@@ -2422,6 +2819,9 @@
     </style>
 </head>
 <body>
+    <!-- Notification Container -->
+    <div class="notification-container" id="notificationContainer"></div>
+
     <!-- Header -->
     <header class="header">
         <nav class="nav-container">
@@ -2506,6 +2906,29 @@
     <!-- Main Content -->
     <main class="main-content" id="jobs">
         <div class="container">
+            <!-- Admin Panel (only visible to admin users) -->
+            <div class="admin-panel" id="adminPanel" style="display: none;">
+                <div class="admin-header">
+                    <div class="admin-title">
+                        <span>🔧</span>
+                        Admin Dashboard
+                    </div>
+                    <div class="admin-actions">
+                        <button class="btn-admin" onclick="openAddJobModal()">
+                            <span>➕</span>
+                            Add New Job
+                        </button>
+                        <button class="btn-admin secondary" onclick="toggleAdminMode()">
+                            <span>👁️</span>
+                            Exit Admin Mode
+                        </button>
+                    </div>
+                </div>
+                <div class="admin-job-list" id="adminJobList">
+                    <!-- Admin job list will be populated here -->
+                </div>
+            </div>
+
             <div class="section-header">
                 <h2 class="section-title">Latest Job Opportunities</h2>
                 <p class="section-subtitle">Explore our curated selection of the best job opportunities from leading companies</p>
@@ -3171,7 +3594,65 @@
         </div>
     </div>
 
+    <!-- Job Form Modal (Admin) -->
+    <div class="modal job-form-modal" id="jobFormModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeJobFormModal()">&times;</button>
+            <div id="jobFormContent">
+                <!-- Job form will be populated here -->
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Notification System
+        function showNotification(title, message, type = 'info', duration = 5000) {
+            const container = document.getElementById('notificationContainer');
+            const id = 'notification_' + Date.now();
+            
+            const icons = {
+                success: '✅',
+                error: '❌',
+                warning: '⚠️',
+                info: 'ℹ️'
+            };
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.id = id;
+            notification.innerHTML = `
+                <div class="notification-icon">${icons[type] || icons.info}</div>
+                <div class="notification-content">
+                    <div class="notification-title">${title}</div>
+                    <div class="notification-message">${message}</div>
+                </div>
+                <button class="notification-close" onclick="removeNotification('${id}')">&times;</button>
+            `;
+            
+            container.appendChild(notification);
+            
+            // Auto remove after duration
+            if (duration > 0) {
+                setTimeout(() => {
+                    removeNotification(id);
+                }, duration);
+            }
+            
+            return id;
+        }
+
+        function removeNotification(id) {
+            const notification = document.getElementById(id);
+            if (notification) {
+                notification.classList.add('removing');
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }
+        }
+
         // Sample job data
         const jobsData = [
             {
@@ -3434,8 +3915,10 @@
                     
                     <div class="job-footer">
                         <span class="job-posted">Posted ${job.posted}</span>
-                        <button class="apply-btn" onclick="event.stopPropagation(); applyToJob(${job.id})">
-                            Apply Now
+                        <button class="apply-btn" onclick="event.stopPropagation(); applyToJob(${job.id})" id="applyBtn_${job.id}">
+                            <span class="btn-text">Apply Now</span>
+                            <span class="btn-loader">⏳</span>
+                            <span class="btn-success">✅ Applied</span>
                         </button>
                     </div>
                 </div>
@@ -3563,7 +4046,11 @@
             if (!window.currentUser) {
                 // Store the job ID to apply after login
                 window.pendingApplication = jobId;
-                alert('Please sign in to apply for jobs. You will be redirected to the application after logging in.');
+                showNotification(
+                    'Login Required',
+                    'Please sign in to apply for jobs. You will be redirected to the application after logging in.',
+                    'warning'
+                );
                 closeModal();
                 closeCompanyModal();
                 openLoginModal();
@@ -3571,33 +4058,64 @@
             }
 
             const job = jobsData.find(j => j.id === jobId);
+            const applyBtn = document.getElementById(`applyBtn_${jobId}`);
             
             // Check if already applied
             if (window.appliedJobs && window.appliedJobs.some(app => app.jobId === jobId)) {
-                alert(`You have already applied for the ${job.title} position at ${job.company}.`);
+                showNotification(
+                    'Already Applied',
+                    `You have already applied for the ${job.title} position at ${job.company}.`,
+                    'info'
+                );
                 return;
             }
 
-            // Add to applied jobs
-            const application = {
-                id: Date.now(),
-                jobId: jobId,
-                jobTitle: job.title,
-                company: job.company,
-                location: job.location,
-                salary: job.salary,
-                appliedDate: new Date().toISOString(),
-                status: 'Applied'
-            };
-
-            if (!window.appliedJobs) {
-                window.appliedJobs = [];
+            // Start applying animation
+            if (applyBtn) {
+                applyBtn.classList.add('applying');
             }
-            window.appliedJobs.push(application);
 
-            alert(`Thank you for your interest in the ${job.title} position at ${job.company}! Your application has been submitted.`);
-            closeModal();
-            closeCompanyModal();
+            // Simulate application process
+            setTimeout(() => {
+                // Add to applied jobs
+                const application = {
+                    id: Date.now(),
+                    jobId: jobId,
+                    jobTitle: job.title,
+                    company: job.company,
+                    location: job.location,
+                    salary: job.salary,
+                    appliedDate: new Date().toISOString(),
+                    status: 'Applied'
+                };
+
+                if (!window.appliedJobs) {
+                    window.appliedJobs = [];
+                }
+                window.appliedJobs.push(application);
+
+                // Show success animation
+                if (applyBtn) {
+                    applyBtn.classList.remove('applying');
+                    applyBtn.classList.add('applied');
+                }
+
+                showNotification(
+                    'Application Submitted!',
+                    `Your application for ${job.title} at ${job.company} has been successfully submitted.`,
+                    'success'
+                );
+
+                closeModal();
+                closeCompanyModal();
+
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    if (applyBtn) {
+                        applyBtn.classList.remove('applied');
+                    }
+                }, 3000);
+            }, 2000);
         }
 
         // Show/hide loading
@@ -3641,11 +4159,19 @@
         }
 
         function socialLogin(provider) {
-            alert(`${provider.charAt(0).toUpperCase() + provider.slice(1)} login would be implemented here. This is a demo version.`);
+            showNotification(
+                'Social Login',
+                `${provider.charAt(0).toUpperCase() + provider.slice(1)} login would be implemented here. This is a demo version.`,
+                'info'
+            );
         }
 
         function showForgotPassword() {
-            alert('Password reset functionality would be implemented here. This is a demo version.');
+            showNotification(
+                'Password Reset',
+                'Password reset functionality would be implemented here. This is a demo version.',
+                'info'
+            );
         }
 
         // Handle login form submission
@@ -3657,12 +4183,12 @@
             
             // Dummy credentials for demo
             const validCredentials = [
-                { email: 'demo@talenthub.com', password: 'demo123' },
-                { email: 'john.doe@email.com', password: 'password' },
-                { email: 'admin@talenthub.com', password: 'admin123' }
+                { email: 'demo@talenthub.com', password: 'demo123', role: 'user' },
+                { email: 'john.doe@email.com', password: 'password', role: 'user' },
+                { email: 'admin@talenthub.com', password: 'admin123', role: 'admin' }
             ];
             
-            const isValidLogin = validCredentials.some(cred => 
+            const userCredential = validCredentials.find(cred => 
                 cred.email === email && cred.password === password
             );
             
@@ -3674,12 +4200,16 @@
                 loginBtn.disabled = true;
                 
                 setTimeout(() => {
-                    if (isValidLogin) {
-                        alert(`Welcome back! You've successfully signed in as ${email}`);
+                    if (userCredential) {
+                        showNotification(
+                            'Welcome Back!',
+                            `You've successfully signed in as ${email}`,
+                            'success'
+                        );
                         closeAuthModal();
                         
                         // Update UI to show logged in state
-                        updateAuthUI(email);
+                        updateAuthUI(email, userCredential.role);
                         
                         // Check if there's a pending application
                         if (window.pendingApplication) {
@@ -3692,7 +4222,11 @@
                         
                         this.reset();
                     } else {
-                        alert('Invalid credentials! Try:\n\nEmail: demo@talenthub.com\nPassword: demo123\n\nOr:\n\nEmail: john.doe@email.com\nPassword: password');
+                        showNotification(
+                            'Login Failed',
+                            'Invalid credentials! Try: admin@talenthub.com / admin123 for admin access, or demo@talenthub.com / demo123 for user access.',
+                            'error'
+                        );
                     }
                     
                     loginBtn.textContent = originalText;
@@ -3713,12 +4247,20 @@
             
             // Validate passwords match
             if (password !== confirmPassword) {
-                alert('Passwords do not match. Please try again.');
+                showNotification(
+                    'Password Mismatch',
+                    'Passwords do not match. Please try again.',
+                    'error'
+                );
                 return;
             }
             
             if (!agreeTerms) {
-                alert('Please agree to the Terms of Service and Privacy Policy.');
+                showNotification(
+                    'Terms Required',
+                    'Please agree to the Terms of Service and Privacy Policy.',
+                    'warning'
+                );
                 return;
             }
             
@@ -3730,11 +4272,15 @@
                 signupBtn.disabled = true;
                 
                 setTimeout(() => {
-                    alert(`Welcome to TalentHub, ${name}! Your account has been created successfully.`);
+                    showNotification(
+                        'Account Created!',
+                        `Welcome to TalentHub, ${name}! Your account has been created successfully.`,
+                        'success'
+                    );
                     closeAuthModal();
                     
                     // Update UI to show logged in state
-                    updateAuthUI(email);
+                    updateAuthUI(email, 'user');
                     
                     // Check if there's a pending application
                     if (window.pendingApplication) {
@@ -3753,9 +4299,10 @@
         });
 
         // Update UI after login/signup
-        function updateAuthUI(email) {
+        function updateAuthUI(email, role = 'user') {
             const authButtons = document.getElementById('authButtons');
             const profileMenu = document.getElementById('profileMenu');
+            const adminPanel = document.getElementById('adminPanel');
             const name = email.split('@')[0].replace(/[._]/g, ' ');
             const nameParts = name.split(' ');
             const initials = nameParts.map(part => part.charAt(0)).join('').substring(0, 2).toUpperCase();
@@ -3764,6 +4311,17 @@
             // Hide auth buttons and show profile menu
             authButtons.style.display = 'none';
             profileMenu.style.display = 'flex';
+            
+            // Show admin panel if admin
+            if (role === 'admin') {
+                adminPanel.style.display = 'block';
+                renderAdminJobList();
+                showNotification(
+                    'Admin Access Granted',
+                    'You now have access to the admin dashboard to manage jobs.',
+                    'info'
+                );
+            }
             
             // Update profile information in header
             document.getElementById('profileInitials').textContent = initials;
@@ -3778,7 +4336,8 @@
             window.currentUser = {
                 email: email,
                 name: displayName,
-                initials: initials
+                initials: initials,
+                role: role
             };
         }
 
@@ -3786,17 +4345,23 @@
         function logout() {
             const authButtons = document.getElementById('authButtons');
             const profileMenu = document.getElementById('profileMenu');
+            const adminPanel = document.getElementById('adminPanel');
             
             // Show auth buttons and hide profile menu
             authButtons.style.display = 'flex';
             profileMenu.style.display = 'none';
+            adminPanel.style.display = 'none';
             
             // Clear user data
             window.currentUser = null;
             window.appliedJobs = null;
             window.pendingApplication = null;
             
-            alert('You have been logged out successfully.');
+            showNotification(
+                'Logged Out',
+                'You have been logged out successfully.',
+                'info'
+            );
         }
 
         // Close modal when clicking outside
@@ -3851,11 +4416,246 @@
         }
 
         function showNotifications() {
-            alert('📬 Notifications:\n\n• New job match: Senior Developer at TechCorp\n• Application update: Interview scheduled for Product Manager role\n• 5 new companies viewed your profile this week');
+            showNotification(
+                'Recent Notifications',
+                '• New job match: Senior Developer at TechCorp\n• Application update: Interview scheduled for Product Manager role\n• 5 new companies viewed your profile this week',
+                'info',
+                8000
+            );
         }
 
         function showHelp() {
-            alert('🆘 Help & Support:\n\nFor assistance, please contact:\n📧 support@talenthub.com\n📞 1-800-TALENT\n\nOr visit our Help Center for FAQs and guides.');
+            showNotification(
+                'Help & Support',
+                'For assistance, contact support@talenthub.com or call 1-800-TALENT. Visit our Help Center for FAQs and guides.',
+                'info'
+            );
+        }
+
+        // Admin Functions
+        function renderAdminJobList() {
+            const adminJobList = document.getElementById('adminJobList');
+            adminJobList.innerHTML = jobsData.map(job => `
+                <div class="admin-job-item">
+                    <div class="admin-job-info">
+                        <div class="admin-job-title">${job.title}</div>
+                        <div class="admin-job-meta">${job.company} • ${job.location} • Posted ${job.posted}</div>
+                    </div>
+                    <div class="admin-job-actions">
+                        <button class="btn-admin btn-admin-sm" onclick="editJob(${job.id})">
+                            <span>✏️</span> Edit
+                        </button>
+                        <button class="btn-admin btn-admin-sm secondary" onclick="deleteJob(${job.id})">
+                            <span>🗑️</span> Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleAdminMode() {
+            const adminPanel = document.getElementById('adminPanel');
+            adminPanel.style.display = 'none';
+            showNotification(
+                'Admin Mode Disabled',
+                'You have exited admin mode. You can re-enable it by logging in as admin again.',
+                'info'
+            );
+        }
+
+        function openAddJobModal() {
+            openJobFormModal();
+        }
+
+        function editJob(jobId) {
+            const job = jobsData.find(j => j.id === jobId);
+            if (job) {
+                openJobFormModal(job);
+            }
+        }
+
+        function deleteJob(jobId) {
+            const job = jobsData.find(j => j.id === jobId);
+            if (job && confirm(`Are you sure you want to delete the "${job.title}" position at ${job.company}?`)) {
+                const index = jobsData.findIndex(j => j.id === jobId);
+                if (index !== -1) {
+                    jobsData.splice(index, 1);
+                    filteredJobs = filteredJobs.filter(j => j.id !== jobId);
+                    renderJobs(filteredJobs);
+                    renderAdminJobList();
+                    updateJobCount();
+                    showNotification(
+                        'Job Deleted',
+                        `The ${job.title} position has been successfully deleted.`,
+                        'success'
+                    );
+                }
+            }
+        }
+
+        function openJobFormModal(job = null) {
+            const modal = document.getElementById('jobFormModal');
+            const content = document.getElementById('jobFormContent');
+            const isEdit = job !== null;
+            
+            content.innerHTML = `
+                <div class="job-form-header">
+                    <h2>${isEdit ? 'Edit Job' : 'Add New Job'}</h2>
+                    <p>${isEdit ? 'Update the job details below' : 'Fill in the details for the new job posting'}</p>
+                </div>
+                
+                <form id="jobForm" class="job-form">
+                    <div class="job-form-section">
+                        <h3>Basic Information</h3>
+                        <div class="job-form-row">
+                            <div class="job-form-group">
+                                <label class="job-form-label">Job Title</label>
+                                <input type="text" class="job-form-input" id="jobTitle" value="${job?.title || ''}" required>
+                            </div>
+                            <div class="job-form-group">
+                                <label class="job-form-label">Company</label>
+                                <input type="text" class="job-form-input" id="jobCompany" value="${job?.company || ''}" required>
+                            </div>
+                        </div>
+                        <div class="job-form-row">
+                            <div class="job-form-group">
+                                <label class="job-form-label">Location</label>
+                                <input type="text" class="job-form-input" id="jobLocation" value="${job?.location || ''}" required>
+                            </div>
+                            <div class="job-form-group">
+                                <label class="job-form-label">Job Type</label>
+                                <select class="job-form-input" id="jobType" required>
+                                    <option value="">Select type</option>
+                                    <option value="Full-time" ${job?.type === 'Full-time' ? 'selected' : ''}>Full-time</option>
+                                    <option value="Part-time" ${job?.type === 'Part-time' ? 'selected' : ''}>Part-time</option>
+                                    <option value="Contract" ${job?.type === 'Contract' ? 'selected' : ''}>Contract</option>
+                                    <option value="Remote" ${job?.type === 'Remote' ? 'selected' : ''}>Remote</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="job-form-row">
+                            <div class="job-form-group">
+                                <label class="job-form-label">Experience Level</label>
+                                <select class="job-form-input" id="jobExperience" required>
+                                    <option value="">Select level</option>
+                                    <option value="Entry" ${job?.experience === 'Entry' ? 'selected' : ''}>Entry Level</option>
+                                    <option value="Mid" ${job?.experience === 'Mid' ? 'selected' : ''}>Mid Level</option>
+                                    <option value="Senior" ${job?.experience === 'Senior' ? 'selected' : ''}>Senior Level</option>
+                                    <option value="Executive" ${job?.experience === 'Executive' ? 'selected' : ''}>Executive</option>
+                                </select>
+                            </div>
+                            <div class="job-form-group">
+                                <label class="job-form-label">Industry</label>
+                                <select class="job-form-input" id="jobIndustry" required>
+                                    <option value="">Select industry</option>
+                                    <option value="Technology" ${job?.industry === 'Technology' ? 'selected' : ''}>Technology</option>
+                                    <option value="Finance" ${job?.industry === 'Finance' ? 'selected' : ''}>Finance</option>
+                                    <option value="Healthcare" ${job?.industry === 'Healthcare' ? 'selected' : ''}>Healthcare</option>
+                                    <option value="Marketing" ${job?.industry === 'Marketing' ? 'selected' : ''}>Marketing</option>
+                                    <option value="Design" ${job?.industry === 'Design' ? 'selected' : ''}>Design</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="job-form-group">
+                            <label class="job-form-label">Salary Range</label>
+                            <input type="text" class="job-form-input" id="jobSalary" value="${job?.salary || ''}" placeholder="e.g., $80,000 - $120,000" required>
+                        </div>
+                    </div>
+
+                    <div class="job-form-section">
+                        <h3>Job Details</h3>
+                        <div class="job-form-group">
+                            <label class="job-form-label">Job Description</label>
+                            <textarea class="job-form-input job-form-textarea" id="jobDescription" required>${job?.description || ''}</textarea>
+                        </div>
+                        <div class="job-form-group">
+                            <label class="job-form-label">Requirements (one per line)</label>
+                            <textarea class="job-form-input job-form-textarea" id="jobRequirements">${job?.requirements?.join('\n') || ''}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="job-form-actions">
+                        <button type="button" class="btn-admin secondary" onclick="closeJobFormModal()">Cancel</button>
+                        <button type="submit" class="btn-admin">${isEdit ? 'Update Job' : 'Create Job'}</button>
+                    </div>
+                </form>
+            `;
+            
+            modal.style.display = 'block';
+            
+            // Handle form submission
+            document.getElementById('jobForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveJob(job?.id);
+            });
+        }
+
+        function closeJobFormModal() {
+            document.getElementById('jobFormModal').style.display = 'none';
+        }
+
+        function saveJob(editId = null) {
+            const formData = {
+                title: document.getElementById('jobTitle').value,
+                company: document.getElementById('jobCompany').value,
+                location: document.getElementById('jobLocation').value,
+                type: document.getElementById('jobType').value,
+                experience: document.getElementById('jobExperience').value,
+                industry: document.getElementById('jobIndustry').value,
+                salary: document.getElementById('jobSalary').value,
+                description: document.getElementById('jobDescription').value,
+                requirements: document.getElementById('jobRequirements').value.split('\n').filter(req => req.trim())
+            };
+            
+            // Determine salary range for filtering
+            const salaryValue = formData.salary.toLowerCase();
+            let salaryRange = '';
+            if (salaryValue.includes('50') && !salaryValue.includes('150')) {
+                salaryRange = '0-50k';
+            } else if (salaryValue.includes('100') || (salaryValue.includes('50') && salaryValue.includes('100'))) {
+                salaryRange = '50k-100k';
+            } else if (salaryValue.includes('150') || (salaryValue.includes('100') && salaryValue.includes('150'))) {
+                salaryRange = '100k-150k';
+            } else if (salaryValue.includes('150') || salaryValue.includes('200')) {
+                salaryRange = '150k+';
+            }
+            
+            if (editId) {
+                // Update existing job
+                const jobIndex = jobsData.findIndex(j => j.id === editId);
+                if (jobIndex !== -1) {
+                    jobsData[jobIndex] = {
+                        ...jobsData[jobIndex],
+                        ...formData,
+                        salaryRange: salaryRange,
+                        posted: 'Updated just now'
+                    };
+                    showNotification(
+                        'Job Updated',
+                        `The ${formData.title} position has been successfully updated.`,
+                        'success'
+                    );
+                }
+            } else {
+                // Add new job
+                const newJob = {
+                    id: Math.max(...jobsData.map(j => j.id)) + 1,
+                    ...formData,
+                    salaryRange: salaryRange,
+                    posted: 'Just posted'
+                };
+                jobsData.unshift(newJob);
+                showNotification(
+                    'Job Created',
+                    `The ${formData.title} position has been successfully created.`,
+                    'success'
+                );
+            }
+            
+            // Refresh displays
+            applyFilters();
+            renderAdminJobList();
+            closeJobFormModal();
         }
 
         function openProfileModal() {
@@ -3883,18 +4683,30 @@
         }
 
         function openSettingsModal() {
-            alert('Settings functionality would be implemented here. This includes notification preferences, privacy settings, and account management.');
+            showNotification(
+                'Settings',
+                'Settings functionality would be implemented here. This includes notification preferences, privacy settings, and account management.',
+                'info'
+            );
         }
 
         function viewApplications() {
             if (!window.currentUser) {
-                alert('Please sign in to view your applications.');
+                showNotification(
+                    'Login Required',
+                    'Please sign in to view your applications.',
+                    'warning'
+                );
                 openLoginModal();
                 return;
             }
 
             if (!window.appliedJobs || window.appliedJobs.length === 0) {
-                alert('You haven\'t applied to any jobs yet. Start browsing and apply to jobs that interest you!');
+                showNotification(
+                    'No Applications',
+                    'You haven\'t applied to any jobs yet. Start browsing and apply to jobs that interest you!',
+                    'info'
+                );
                 return;
             }
 
@@ -3902,7 +4714,11 @@
         }
 
         function viewSavedJobs() {
-            alert('Saved Jobs page would display all the jobs you\'ve bookmarked for later review.');
+            showNotification(
+                'Coming Soon',
+                'Saved Jobs feature will display all the jobs you\'ve bookmarked for later review.',
+                'info'
+            );
         }
 
         // Profile form submission
@@ -4831,5 +5647,6 @@
         // Initialize the app
         init();
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9873d7eb942247b0',t:'MTc1OTIzNjYwMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9873ef8f214f47b0',t:'MTc1OTIzNzU2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
